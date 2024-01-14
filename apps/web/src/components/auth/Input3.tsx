@@ -11,53 +11,51 @@ const Input3 = ({ setNext }: any) => {
                 <p>Create Password</p>
               </div>
             </div>
-
             <div>
-              <form action="" method="post">
-                <div className="flex flex-col space-y-16">
-                  <div className="">
-                    <div className="mb-6">
-                      <label
-                        htmlFor="password"
-                        className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Password
-                      </label>
-                      <input
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        type="password"
-                        name="password"
-                        id="password"
-                      />
-                    </div>
-                    <div>
+              <div className="flex flex-col space-y-16">
+                <div className="">
+                  <div className="mb-6">
                     <label
-                        htmlFor="confirmpassword"
-                        className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Confirm Psassword
-                      </label>
-                      <input
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        type="password"
-                        name="confirmpassword"
-                        id="confirmpassword"
-                      />
-                    </div>
+                      htmlFor="password"
+                      className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      type="password"
+                      name="password"
+                      id="password"
+                    />
                   </div>
-
-                  <div className="flex flex-col space-y-5">
-                    <div>
-                      <button
-                        className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
-                        onClick={() => setNext('input4')}
-                      >
-                        Create Password
-                      </button>
-                    </div>
+                  <div>
+                    <label
+                      htmlFor="confirmpassword"
+                      className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Confirm Psassword
+                    </label>
+                    <input
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      type="password"
+                      name="confirmpassword"
+                      id="confirmpassword"
+                    />
                   </div>
                 </div>
-              </form>
+
+                <div className="flex flex-col space-y-5">
+                  <div>
+                    <button
+                      className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
+                      onClick={() => setNext('input4')}
+                      type="submit"
+                    >
+                      Create Password
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

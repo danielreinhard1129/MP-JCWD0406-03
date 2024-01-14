@@ -1,13 +1,13 @@
 'use client';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { ModalAction } from '@/lib/features/userSlice';
 import FormRegister from './FormRegister';
 
 const ModalSignin = () => {
   const selectorModal = useAppSelector((state) => state.user.showModal);
+
   const dispatch = useAppDispatch();
 
   const cancelButtonRef = useRef(null);
@@ -47,7 +47,7 @@ const ModalSignin = () => {
                 <div className="mb-5">
                   <div className="sm:flex sm:items-start">
                     <div className="w-full">
-                      <div >
+                      <div>
                         <FormRegister dispatch={dispatch} />
                       </div>
                     </div>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Input1 from './Input1';
 import Input2 from './Input2';
 import { ModalAction } from '@/lib/features/userSlice';
@@ -7,6 +7,12 @@ import Input3 from './Input3';
 import Input4 from './Input4';
 
 const FormRegister = ({ dispatch }: any) => {
+  const handlesubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(event);
+    
+    
+  };
   const [next, setNext] = useState('input1');
   return (
     <section>
@@ -14,33 +20,33 @@ const FormRegister = ({ dispatch }: any) => {
         <h1 className=" text-4xl py-3 text-white font-bold font-mono">
           Register
         </h1>
-        {next === 'input1' ? (
+        {next === 'input1' && (
           <button
             className="text-white text-2xl"
             onClick={() => dispatch(ModalAction(false))}
           >
             x{' '}
           </button>
-        ) : (
+        )}
+        {next === 'input2' && (
           <button
             className="text-white text-2xl"
-            onClick={() =>
-              setNext('input1')
-            }
+            onClick={() => setNext('input1')}
           >
             Back
           </button>
         )}
       </div>
-      <form className="">
+      <form onSubmit={handlesubmit}>
         {next === 'input1' && <Input1 setNext={setNext} />}
-
         {next !== 'input1' && (
           <div className="flex  items-center m-4">
             <div className="flex flex-col items-center text-center">
               <div
                 className={`border-2  ${
-                  next === 'input2' ? 'bg-green-500 text-white ' : 'text-black border-gray-500'
+                  next === 'input2'
+                    ? 'bg-green-500 text-white '
+                    : 'text-black border-gray-500'
                 } w-12 text-center h-12 rounded-full flex flex-col justify-center  font-bold mt-5 mb-2`}
               >
                 <h2>1</h2>
@@ -77,9 +83,8 @@ const FormRegister = ({ dispatch }: any) => {
             </div>
           </div>
         )}
-
         {next === 'input2' && <Input2 setNext={setNext} />}
-        {next === 'input3' && <Input3 setNext={setNext}/>}
+        {next === 'input3' && <Input3 setNext={setNext} />}
         {next === 'input4' && <Input4 />}
       </form>
     </section>
