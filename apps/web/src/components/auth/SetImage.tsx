@@ -1,7 +1,10 @@
-import Image from 'next/image';
 import React from 'react';
 
-const Input4 = () => {
+const SetImage = ({ formik }: any) => {
+  const handleImageChange = (e: any) => {
+    // formik?.setFieldValue('image', e.currentTarget?.file[0]);
+    formik.setFieldValue('image', e.currentTarget.files[0]);
+  };
   return (
     <div>
       <div className="flex flex-col items-center">
@@ -10,7 +13,14 @@ const Input4 = () => {
           <div className="rounded-lg overflow-hidden ">
             <div className="md:flex">
               <div className=" p-3">
-                <div className="relative border-dotted bg-[url(/pohon.jpg)] bg-repeat h-20 w-20 rounded-full border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                <div
+                  className="relative border-dotted  bg-no-repeat bg-center h-20 w-20 rounded-full border-2 border-blue-700 bg-gray-100 flex justify-center items-center"
+                  style={{
+                    backgroundImage: formik.values.image
+                      ? `url(${URL.createObjectURL(formik.values.image)})`
+                      : 'none',
+                  }}
+                >
                   <div className="absolute">
                     <div className="flex flex-col items-center">
                       <i className="fa fa-folder-open fa-4x text-blue-700"></i>
@@ -20,41 +30,32 @@ const Input4 = () => {
                   <input
                     type="file"
                     className="h-full w-full opacity-0"
-                    name=""
+                    name="image"
+                    onChange={handleImageChange}
+                    onBlur={formik?.handleBlur}
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <p>
+          Masukan your Image <span className="opacity-50">(optional)</span>
+        </p>
       </div>
-      <div className="m-6">
-        <label
-          htmlFor="codeReferal"
-          className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Masukan Kode Referal
-        </label>
-        <input
-          type="text"
-          id="codereferal"
-          className="bg-gray-50 border-2 border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="text..."
-        />
-      </div>
+
       <div className="flex flex-col space-y-5 w-full px-4 mt-8">
         <div>
           <button
             className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5  bg-blue-700 border-none text-white text-sm shadow-sm"
             type="submit"
           >
-            Submit
+            continue
           </button>{' '}
         </div>
       </div>
-
     </div>
   );
 };
 
-export default Input4;
+export default SetImage;

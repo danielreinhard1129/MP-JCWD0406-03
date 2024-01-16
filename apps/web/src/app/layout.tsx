@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import StoreProvider from './StoreProvider';
 import Navbar from '@/components/Navbar';
-import ModalAuth from '@/components/auth/ModalSignin';
+import ModalSignup from '@/components/auth/ModalSignup';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <Navbar />
-          <ModalAuth />
+          <ModalSignup />
           {children}
         </StoreProvider>
       </body>

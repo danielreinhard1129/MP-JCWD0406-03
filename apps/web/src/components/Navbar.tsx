@@ -2,17 +2,18 @@
 
 import { ModalAction } from "@/lib/features/userSlice";
 import { useAppDispatch } from "@/lib/hooks";
+import { sesion } from "@/lib/sesion";
 
 
 const Navbar = () => {
     const dispatch = useAppDispatch()
-
   return (
     <section>
       <nav className="flex justify-between w-full p-5 shadow-md">
         <h1 className="font-bold text-2xl font-sans text-blue-500">
           Karcis.Com
         </h1>
+        {!sesion &&
         <ul className="flex justify-evenly p-2">
           <li>
             <button className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg">
@@ -25,6 +26,7 @@ const Navbar = () => {
             </button>
           </li>
         </ul>
+        }
       </nav>
     </section>
   );
