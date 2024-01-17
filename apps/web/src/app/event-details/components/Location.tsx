@@ -3,6 +3,8 @@ import { GrLocation } from 'react-icons/gr';
 import { SlCalender } from 'react-icons/sl';
 
 const Location = () => {
+  const ticketPrice = '212.000';
+
   return (
     <div className="max-w-4xl mx-auto flex flex-col lg:flex-row lg:justify-between mb-6 items-center">
       <div className="lg:w-1/2">
@@ -26,13 +28,20 @@ const Location = () => {
           </p>
         </div>
       </div>
-
-      <div className="lg:w-1/2 lg:text-center">
-        <h1>Ticket starting at</h1>
-        <h1>Rp 212.000</h1>
-        <button className="bg-[#5553ee] hover:[#5553ee] text-white font-bold py-2 px-4 rounded">
-          Buy Tickets
-        </button>
+      <div className="max-w-sm rounded overflow-hidden shadow-lg p-5 bg-white border border-gray-300">
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2 text-center">
+            Tickets starting at
+          </div>
+          <p className="text-gray-700 text-base text-center">
+            Rp. {ticketPrice}
+          </p>
+        </div>
+        <div className="px-6 pb-2 text-center">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Buy Tickets
+          </button>
+        </div>
       </div>
     </div>
   );
