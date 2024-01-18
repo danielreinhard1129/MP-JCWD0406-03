@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  AuthAction,
   ModalLoginAction,
   ModalRegisterAction,
 } from '@/lib/features/userSlice';
@@ -10,11 +11,28 @@ import ModalSignin from '../app/components/login/ModalSignin';
 import ModalSignup from '../app/components/register/ModalSignup';
 import Link from 'next/link';
 import ModalForgotPassword from '@/app/components/forgotPassword/ModalForgotPassword';
+import { useEffect } from 'react';
+import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const login = useAppSelector((state) => state.user.dataUser);
+  const token = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('token') as string) : null;
 
+  useEffect(() => {
+    if (token) {
+      handleSesion(token);
+    }
+  }, [token]);
+
+  const handleSesion = async (token: string) => {
+    try {
+      const { data } = await useKeepLogin(token);
+      dispatch(AuthAction(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section>
       <nav className="flex justify-between w-full p-5 shadow-md">
@@ -23,7 +41,7 @@ const Navbar = () => {
             Karcis.Com
           </h1>
         </Link>
-        {!login?.data ? (
+        {!login.id ? (
           <ul className="flex justify-evenly p-2">
             <li>
               <button

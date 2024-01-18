@@ -3,7 +3,7 @@ import { excludeFields } from '@/helper/excludeFields';
 import { createToken } from '@/helper/jwt';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { findUserByPhoneNumber } from '@/repositories/users/findUserByPhoneNumber';
-import { ILogin} from '@/typeapi/user.type';
+import { ILogin } from '@/util/user.type';
 
 export const loginAction = async (body: ILogin) => {
   try {
@@ -35,7 +35,7 @@ export const loginAction = async (body: ILogin) => {
       };
     }
 
-    const token = createToken({ id: user.id });
+    const token = createToken({ email: user.email });
     const data = excludeFields(user, ['password']);
 
     return {
