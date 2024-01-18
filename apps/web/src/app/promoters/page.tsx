@@ -3,9 +3,8 @@
 import { useAppSelector } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import HomePage from './home/page';
 
-function Home() {
+const Promoters = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
   const router = useRouter();
   const role = selector?.data.role?.name;
@@ -13,9 +12,10 @@ function Home() {
     authen();
   }, []);
   const authen = () => {
-    if (role === 'promoter') router.push('/promoters');
+    if (role === 'customer') return router.push('/');
+    if (!selector?.data) return router.push('/promoters/join');
   };
-  return <main><HomePage/></main>;
-}
+  return <section>{role === 'customer' && <div>Admin</div>}</section>;
+};
 
-export default Home;
+export default Promoters;
