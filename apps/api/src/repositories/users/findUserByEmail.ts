@@ -5,6 +5,9 @@ export const findUserByEmail = async(email:string) => {
         const result = await prisma.user.findUnique({
             where:{
                 email
+            },
+            include:{
+                role:true
             }
         })
         return result

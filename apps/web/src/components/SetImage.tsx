@@ -2,8 +2,8 @@ import React from 'react';
 
 const SetImage = ({ formik }: any) => {
   const handleImageChange = (e: any) => {
-    // formik?.setFieldValue('image', e.currentTarget?.file[0]);
     formik.setFieldValue('image', e.currentTarget.files[0]);
+    
   };
   return (
     <div>

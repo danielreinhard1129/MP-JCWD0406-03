@@ -6,3 +6,5 @@ export interface IUser {
     phoneNumber: string,
     password: string
 }
+
+export type IUserRole = 'customer' | 'promoter'

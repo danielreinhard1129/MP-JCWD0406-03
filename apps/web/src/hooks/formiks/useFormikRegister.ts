@@ -1,22 +1,25 @@
+import { AuthAction } from '@/lib/features/userSlice';
+import { useAppDispatch } from '@/lib/hooks';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import Error from 'next/error';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 
 YupPassword(Yup);
 
-const useFormikRegister = (setNext: CallableFunction) => {
+const useFormikRegister = (setNext: CallableFunction, role: string) => {
+  const dispatch = useAppDispatch();
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('This FIeld is Required'),
-    lastName: Yup.string().required('This FIeld is Required'),
+    firstName: Yup.string().required('This Field is Required'),
+    lastName: Yup.string().required('This Field is Required'),
     email: Yup.string()
       .email('Please enter a valid email')
       .required('This Field is Required'),
     phoneNumber: Yup.string()
       .required('This Field is Required')
       .min(12)
+      .max(12)
       .matches(/^[0-9]+$/, 'plese enter from 0 to 9'),
     password: Yup.string()
       .required('Password cannot be empty')
@@ -37,18 +40,28 @@ const useFormikRegister = (setNext: CallableFunction) => {
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       try {
-        await axios.post('http://localhost:8000/api/users/register', {
-          firstName: values.firstName,
-          lastName: values.lastName,
-          phoneNumber: values.phoneNumber,
-          email: values.email,
-          password: values.password,
-        });
+        const { data } = await axios.post(
+          'http://localhost:8000/api/users/register',
+          {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            phoneNumber: values.phoneNumber,
+            email: values.email,
+            password: values.password,
+            role
+          },
+        );
+        dispatch(AuthAction({ data: data.data, token: data.token }));
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ data: data.data, token: data.token }),
+        );
+
         setNext('input2');
       } catch (error: any) {
-        toast.error(error.response.data.message)
+        toast.error(error.response.data.message);
       }
     },
   });

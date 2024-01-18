@@ -11,9 +11,8 @@ const useFormikCodeReferal = (setNext:CallableFunction) => {
     },
     validationSchema,
     
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values) => {
       try {
-        console.log(values);
         
       } catch (error) {}
     },

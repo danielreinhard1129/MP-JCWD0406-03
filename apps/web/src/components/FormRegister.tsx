@@ -1,39 +1,37 @@
 'use client';
-import React, { FormEvent, useState } from 'react';
-import { ModalAction } from '@/lib/features/userSlice';
+import React, { useState } from 'react';
 
 import useFormikRegister from '@/hooks/formiks/useFormikRegister';
 import InputRegister from './InputRegister';
-import InputFields from '../InputFields';
+import InputFields from './InputFields';
 import useFormikSetImage from '@/hooks/formiks/useFormikSetImage';
 import SetImage from './SetImage';
 import useFormikCodeReferal from '@/hooks/formiks/useFormikCodeReferal';
 import Image from 'next/image';
-import { Toaster } from 'react-hot-toast';
+import { ModalRegisterAction } from '@/lib/features/userSlice';
+import { useRouter } from 'next/navigation';
 
-const FormRegister = ({ dispatch }: any) => {
+const FormRegister = ({ dispatch, title,role ,setLogin }: any) => {
   const [next, setNext] = useState('input1');
-  const formikRegister = useFormikRegister(setNext);
+  const formikRegister = useFormikRegister(setNext, role);
   const formikSetImage = useFormikSetImage(setNext);
   const formikCodeReferal = useFormikCodeReferal(setNext);
+  const router = useRouter()
 
-  const handleComplete = () => {
-    localStorage.setItem('login', JSON.stringify({}));
-    dispatch(ModalAction(false));
-    window.location.reload()
-  };
-
+  const handleNext = () => {
+    if(role === "customer") dispatch(ModalRegisterAction(false))
+    if(role === "promoter") router.push('/promoters')
+  }
   return (
     <section>
-      <Toaster />
       <div className="bg-[#4f4cee] flex justify-between px-6 mb-4">
         <h1 className=" text-4xl py-3 text-white font-bold font-mono">
-          Register
+          {title}
         </h1>
-        {next === 'input1' && (
+        {next === 'input1' && title === "Register"&& (
           <button
             className="text-white text-2xl"
-            onClick={() => dispatch(ModalAction(false))}
+            onClick={() => dispatch(ModalRegisterAction(false))}
           >
             x{' '}
           </button>
@@ -85,13 +83,13 @@ const FormRegister = ({ dispatch }: any) => {
       )}
       {next === 'input1' && (
         <form onSubmit={formikRegister.handleSubmit}>
-          <InputRegister setNext={setNext} formik={formikRegister} />
+          <InputRegister dispatch={dispatch} formik={formikRegister} role={role} setLogin={setLogin}/>
         </form>
       )}
 
       {next === 'input2' && (
         <form onSubmit={formikSetImage.handleSubmit}>
-          <SetImage setNext={setNext} formik={formikSetImage} />
+          <SetImage formik={formikSetImage} />
         </form>
       )}
       {next === 'input3' && (
@@ -141,7 +139,7 @@ const FormRegister = ({ dispatch }: any) => {
           <button
             className="border-2 py-2 px-8 text-white bg-green-400 rounded-lg mt-4 "
             type="submit"
-            onClick={handleComplete}
+            onClick={() => handleNext()}
           >
             Complete
           </button>

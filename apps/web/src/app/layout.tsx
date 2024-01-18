@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import StoreProvider from './StoreProvider';
 import Navbar from '@/components/Navbar';
-import ModalSignup from '@/components/auth/ModalSignup';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,9 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {' '}
         <StoreProvider>
+          <Toaster />
           <Navbar />
-          <ModalSignup />
           {children}
         </StoreProvider>
       </body>

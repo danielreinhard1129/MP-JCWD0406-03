@@ -17,19 +17,21 @@ model User {
   phoneNumber String @unique
   email     String   @unique
   password String
+  role Role?
   codeReferral String @unique 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean @default(false)
-  image Profile_Img?
 }
 
-model Profile_Img {
-  id        Int @id @default(autoincrement())
-  pathImage String @unique
-  user User @relation(fields: [userId],references: [id])
+model Role {
+  id        Int      @id @default(autoincrement())
+  name String 
   userId Int @unique
+  user User @relation(fields: [userId],references: [id])
 }
+
+
 
 model Sample {
   id        Int      @id @default(autoincrement())

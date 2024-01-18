@@ -1,5 +1,5 @@
 import { UserController } from '@/controllers/users.controller';
-import { uploadImage } from '@/helper/uploadimage';
+import { verifyToken } from '@/middlewares/jwtVerifyToken';
 import { Router } from 'express';
 
 export class UserRouter {
@@ -11,11 +11,13 @@ export class UserRouter {
     this.initializeRoutes();
   }
   private initializeRoutes(): void {
-    this.router.post('/register', this.userController.Register)
-    this.router.post('/upload-image', uploadImage.single('image'),this.userController.uploadImage)
+    this.router.post('/register', this.userController.register);
+    this.router.post('/login', this.userController.login);
+    this.router.post('/forgot-password', this.userController.forgotPassword);
+    this.router.get('/verify', verifyToken, this.userController.isValid);
+    this.router.post('/reset-password', verifyToken, this.userController.updatePasswordUser);
   }
   getRouter(): Router {
     return this.router;
   }
-
 }

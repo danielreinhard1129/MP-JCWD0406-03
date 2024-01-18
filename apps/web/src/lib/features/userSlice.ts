@@ -1,20 +1,46 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
+const data =
+  typeof window !== 'undefined'
+    ? JSON.parse(localStorage.getItem('user') as string)
+    : null;
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    showModal: false,
+    showModalRegister: false,
+    showModalLogin: false,
+    showModalForgotPassword: false,
+    dataUser: data,
   },
   reducers: {
-    ModalAction: (state, action) => {
-      state.showModal = action.payload;
+    ModalRegisterAction: (state, action) => {
+      state.showModalRegister = action.payload;
+    },
+    ModalLoginAction: (state, action) => {
+      state.showModalLogin = action.payload;
+    },
+    ModalForgotPasswordAction: (state, action) => {
+      state.showModalForgotPassword = action.payload;
+    },
+
+    AuthAction: (state, action) => {
+      state.dataUser = action.payload;
+    },
+
+    LogoutAction: (state) => {
+      localStorage.removeItem('user');
+      state.dataUser = null;
     },
   },
 });
-
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions
-export const { ModalAction } = userSlice.actions;
-// Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value
+export const {
+  ModalRegisterAction,
+  ModalLoginAction,
+  ModalForgotPasswordAction,
+  AuthAction,
+  LogoutAction,
+} = userSlice.actions;
 
 export default userSlice.reducer;

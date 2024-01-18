@@ -1,1 +1,0 @@
-export const sesion = JSON.parse(localStorage.getItem('login') as string)

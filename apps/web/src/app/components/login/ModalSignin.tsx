@@ -2,14 +2,12 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { ModalAction } from '@/lib/features/userSlice';
-import FormRegister from './FormRegister';
+import { ModalLoginAction } from '@/lib/features/userSlice';
+import FormLogin from '../../../components/FormLogin';
 
-const ModalSignup = () => {
-  const selectorModal = useAppSelector((state) => state.user.showModal);
-
+const ModalSignin = () => {
+  const selectorModal = useAppSelector((state) => state.user.showModalLogin);
   const dispatch = useAppDispatch();
-
   const cancelButtonRef = useRef(null);
 
   return (
@@ -18,7 +16,7 @@ const ModalSignup = () => {
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={ModalAction}
+        onClose={ModalLoginAction}
       >
         <Transition.Child
           as={Fragment}
@@ -48,7 +46,7 @@ const ModalSignup = () => {
                   <div className="sm:flex sm:items-start">
                     <div className="w-full">
                       <div>
-                        <FormRegister dispatch={dispatch} />
+                        <FormLogin dispatch={dispatch} role={'customer'} />
                       </div>
                     </div>
                   </div>
@@ -62,4 +60,4 @@ const ModalSignup = () => {
   );
 };
 
-export default ModalSignup;
+export default ModalSignin;

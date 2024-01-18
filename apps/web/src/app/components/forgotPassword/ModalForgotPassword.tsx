@@ -1,15 +1,15 @@
 'use client';
-import { Fragment, useRef, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { ModalForgotPasswordAction } from '@/lib/features/userSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { ModalAction } from '@/lib/features/userSlice';
-import FormRegister from './FormRegister';
+import { Dialog, Transition } from '@headlessui/react';
+import React, { Fragment, useRef } from 'react';
+import FormForgotPassword from './FormForgotPassword';
 
-const ModalSignin = () => {
-  const selectorModal = useAppSelector((state) => state.user.showModal);
-
+const ModalForgotPassword = () => {
+  const selectorModal = useAppSelector(
+    (state) => state.user.showModalForgotPassword,
+  );
   const dispatch = useAppDispatch();
-
   const cancelButtonRef = useRef(null);
 
   return (
@@ -18,7 +18,7 @@ const ModalSignin = () => {
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={ModalAction}
+        onClose={ModalForgotPasswordAction}
       >
         <Transition.Child
           as={Fragment}
@@ -47,9 +47,7 @@ const ModalSignin = () => {
                 <div className="mb-5">
                   <div className="sm:flex sm:items-start">
                     <div className="w-full">
-                      <div>
-                        <FormRegister dispatch={dispatch} />
-                      </div>
+                      <FormForgotPassword dispatch={dispatch} />
                     </div>
                   </div>
                 </div>
@@ -62,4 +60,4 @@ const ModalSignin = () => {
   );
 };
 
-export default ModalSignin;
+export default ModalForgotPassword;

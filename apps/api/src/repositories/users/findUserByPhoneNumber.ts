@@ -5,6 +5,9 @@ export const findUserByPhoneNumber = async(phoneNumber:string) => {
         const result = await prisma.user.findUnique({
             where:{
                 phoneNumber
+            },
+            include:{
+                role: true
             }
         })
         return result
