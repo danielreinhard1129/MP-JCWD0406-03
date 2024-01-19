@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import { useAppSelector } from '@/lib/hooks';
@@ -14,6 +15,9 @@ function Home() {
   const authen = () => {
     if (role === 'promoter') router.push('/promoters');
   };
+=======
+function Home() {
+>>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
   return <main></main>;
 }
 

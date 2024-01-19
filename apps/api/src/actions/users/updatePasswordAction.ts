@@ -1,7 +1,7 @@
 import { hashPaswword } from '@/helper/bcrypt';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { updatePasswordRepo } from '@/repositories/users/updatePasswordRepo';
-import { IUser } from '@/typeapi/user.type';
+import { IUser } from '@/util/user.type';
 
 export const updatePasswordAction = async (body: IUser) => {
   try {

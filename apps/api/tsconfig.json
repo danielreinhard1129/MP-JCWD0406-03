@@ -2,6 +2,9 @@
   "compilerOptions": {
     "target": "ES2015",
     "module": "commonjs",
+    "moduleResolution": "node",
+    "pretty": true,
+    "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -10,9 +13,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./src/util"]
   },
   // "include": ["src/**/*"],
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "files":["types.d.ts"]
 }

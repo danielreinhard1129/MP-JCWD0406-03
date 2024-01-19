@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import { useAppSelector } from '@/lib/hooks';
@@ -16,6 +17,11 @@ const Promoters = () => {
     if (!selector?.data) return router.push('/promoters/join');
   };
   return <section>{role === 'customer' && <div>Admin</div>}</section>;
+=======
+const Promoters = () => {
+
+  return <section>admin</section>;
+>>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
 };
 
 export default Promoters;

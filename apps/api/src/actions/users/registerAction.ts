@@ -5,7 +5,7 @@ import { nanoid } from '@/helper/nanoid';
 import { createUser } from '@/repositories/users/createUserRepo';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { findUserByPhoneNumber } from '@/repositories/users/findUserByPhoneNumber';
-import { IUser } from '@/typeapi/user.type';
+import { IUser } from '@/util/user.type';
 
 export const registerAction = async (body: IUser) => {
   try {
