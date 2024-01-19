@@ -46,9 +46,8 @@ const Navbar = () => {
             <li>
               <button
                 className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
-                onClick={() => dispatch(ModalLoginAction(true))}
               >
-                Log In
+               <Link href={"/promoters/join"}>promoter</Link>
               </button>
             </li>
             <li>

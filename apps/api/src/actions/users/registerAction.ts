@@ -31,7 +31,7 @@ export const registerAction = async (body: IUser) => {
 
     const user = await createUser(body);
 
-    const token = createToken({ id: user.id });
+    const token = createToken({ email: body.email });
     const data = excludeFields(user, ['password']);
 
     return {

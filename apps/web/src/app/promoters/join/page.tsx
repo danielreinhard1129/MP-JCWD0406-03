@@ -8,21 +8,20 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const Register = () => {
-  const selector = useAppSelector((state) => state.user.dataUser);
+  const role = useAppSelector((state) => state.user.dataUser.role);
   const [login, setLogin] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  
-  
+
   useEffect(() => {
 
-    if (selector.id && selector.role?.name === 'customer') router.push('/');
-    if (selector.id && selector.role?.name === 'promoter') router.push('/promoters');
-  }, [selector]);
+    if (role.id && role?.name === 'customer') router.push('/');
+    if (role.id && role?.name === 'promoter') router.push('/promoters');
+  }, [role]);
   return (
     <section className="flex justify-center items-center h-screen">
-      {!selector.id && (
+      {!role.id && (
         <div className="border-2 flex">
           <div className="border-2 ">
             {!login ? (
@@ -36,6 +35,7 @@ const Register = () => {
                 {!forgotPassword ? (
                   <FormLogin
                     role={'promoter'}
+                    title="Login Promoter"
                     setLogin={setLogin}
                     setForgotPassword={setForgotPassword}
                     dispatch={dispatch}

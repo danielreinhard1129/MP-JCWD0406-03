@@ -53,10 +53,10 @@ const useFormikRegister = (setNext: CallableFunction, role: string) => {
             role
           },
         );
-        dispatch(AuthAction({ data: data.data, token: data.token }));
+        dispatch(AuthAction(data.data));
         localStorage.setItem(
-          'user',
-          JSON.stringify({ data: data.data, token: data.token }),
+          'token',
+          JSON.stringify(data.token),
         );
 
         setNext('input2');
