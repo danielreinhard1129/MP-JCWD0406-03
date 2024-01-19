@@ -1,37 +1,64 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-// import type { RootState } from '../../app/store'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-// Define a type for the slice state
-export interface CounterState {
-  value: number
+export interface UserState {
+  id: number | null;
+  email: String;
+  role: RoleSate | string;
 }
 
-// Define the initial state using that type
-const initialState: CounterState = {
-  value: 0
+type RoleSate = {
+    id: number | null;
+    name: string;
+    userId: number | null;
 }
 
-export const counterSlice = createSlice({
-  name: 'counter',
-  // `createSlice` will infer the state type from the `initialState` argument
-  initialState,
-  reducers: {
-    increment: state => {
-      state.value += 1
-    },
-    decrement: state => {
-      state.value -= 1
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
-    }
+const dataUser: UserState = {
+  id: null,
+  email: '',
+  role: {
+    id: null,
+    name: '',
+    userId: null
   }
-})
+};
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    showModalRegister: false,
+    showModalLogin: false,
+    showModalForgotPassword: false,
+    dataUser,
+  },
+  reducers: {
+    ModalRegisterAction: (state, action) => {
+      state.showModalRegister = action.payload;
+    },
+    ModalLoginAction: (state, action) => {
+      state.showModalLogin = action.payload;
+    },
+    ModalForgotPasswordAction: (state, action) => {
+      state.showModalForgotPassword = action.payload;
+    },
 
-// Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value
+    AuthAction: (state, action: PayloadAction<UserState>) => {
+      state.dataUser.id = action.payload.id;
+      state.dataUser.email = action.payload.email;
+      state.dataUser.role = action.payload.role;
+    },
 
-export default counterSlice.reducer
+    LogoutAction: (state) => {
+      state.dataUser.id = null;
+      localStorage.removeItem('token');
+    },
+  },
+});
+export const {
+  ModalRegisterAction,
+  ModalLoginAction,
+  ModalForgotPasswordAction,
+  AuthAction,
+  LogoutAction,
+} = userSlice.actions;
+
+export default userSlice.reducer;
