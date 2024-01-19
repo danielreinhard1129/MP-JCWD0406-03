@@ -1,5 +1,6 @@
 'use client';
 
+import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
 import { LogoutAction } from '@/lib/features/userSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { Avatar, Dropdown } from 'flowbite-react';
@@ -11,8 +12,8 @@ const DropdownProfile = () => {
   const router = useRouter();
   const selector = useAppSelector((state) => state.user.dataUser);
   const dispatch = useAppDispatch();
-  const handleLogout = () => {
-    if (selector.data.role.name === 'promoter') {
+  const handleLogout = async() => {
+    if (selector.role === 'promoter') {
       router.push('/promoters/join');
     }
     dispatch(LogoutAction());
@@ -32,10 +33,10 @@ const DropdownProfile = () => {
     >
       <Dropdown.Header>
         <span className="block text-base">
-          {selector.data?.firstName} {selector.data?.lastName}
+          {"a"}
         </span>
         <span className="block truncate text-sm font-medium">
-          {selector.data?.email}
+          {""}
         </span>
       </Dropdown.Header>
       <Dropdown.Item icon={CgProfile}>Profile</Dropdown.Item>

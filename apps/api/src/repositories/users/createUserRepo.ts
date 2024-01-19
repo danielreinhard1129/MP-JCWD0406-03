@@ -1,5 +1,5 @@
 import prisma from '@/prisma';
-import { IUser } from '@/typeapi/user.type';
+import { IUser } from '@/util/user.type';
 
 export const createUser = async (body: IUser) => {
   try {
@@ -22,7 +22,7 @@ export const createUser = async (body: IUser) => {
         password,
         role: {
           create: {
-            name: role,       
+            name: role,
           },
         },
       },

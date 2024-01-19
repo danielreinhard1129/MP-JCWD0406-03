@@ -1,6 +1,7 @@
 import { AuthAction, ModalLoginAction } from '@/lib/features/userSlice';
 import axios from 'axios';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
@@ -20,7 +21,7 @@ const useFormikLogin = (role:string) => {
     },
     validationSchema,
 
-    onSubmit: async (values) => {
+    onSubmit: async (values, {resetForm}) => {
       try {
         const { data } = await axios.post(
           'http://localhost:8000/api/users/login',
@@ -29,16 +30,13 @@ const useFormikLogin = (role:string) => {
             password: values.password,
           },
         );
-        console.log(data);
-        if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))
-        
+        if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))    
 
-        dispatch(AuthAction({ data: data.data, token: data.token }));
+        dispatch(AuthAction(data.token));
         localStorage.setItem(
-          'user',
-          JSON.stringify({ data: data.data, token: data.token }),
+          'token',
+          JSON.stringify(data.token),
         );
-
         toast.success('Success Login');
         dispatch(ModalLoginAction(false));
       } catch (error: any) {

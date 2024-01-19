@@ -5,20 +5,24 @@ import FormRegister from '@/components/FormRegister';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Register = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
   const [login, setLogin] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const dispatch = useAppDispatch();
-  const role = selector?.data.role?.name;
   const router = useRouter();
-  if (selector && role === 'customer') router.push('/');
-  if (selector && role === 'promoter') router.push('/promoters');
+  
+  
+  useEffect(() => {
+
+    if (selector.id && selector.role?.name === 'customer') router.push('/');
+    if (selector.id && selector.role?.name === 'promoter') router.push('/promoters');
+  }, [selector]);
   return (
     <section className="flex justify-center items-center h-screen">
-      {!selector && (
+      {!selector.id && (
         <div className="border-2 flex">
           <div className="border-2 ">
             {!login ? (
