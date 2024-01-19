@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 
 const Register = () => {
   const role = useAppSelector((state) => state.user.dataUser.role);
+
   const [login, setLogin] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const dispatch = useAppDispatch();
