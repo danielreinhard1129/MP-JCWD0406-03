@@ -15,7 +15,11 @@ function Home() {
   const authen = () => {
     if (role === 'promoter') router.push('/promoters');
   };
-  return <main><HomePage/></main>;
+  return (
+    <main>
+      <HomePage />
+    </main>
+  );
 }
 
 export default Home;
