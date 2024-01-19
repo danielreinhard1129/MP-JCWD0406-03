@@ -18,7 +18,7 @@ model User {
   email     String   @unique
   password String
   role Role?
-  codeReferral String @unique 
+  referralCode String @unique 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean @default(false)
