@@ -3,10 +3,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export interface UserState {
   id: number | null;
   email: String;
-  role: RoleSate | string;
+  role: RoleSate ;
 }
 
-type RoleSate = {
+interface RoleSate {
     id: number | null;
     name: string;
     userId: number | null;

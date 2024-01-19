@@ -28,7 +28,7 @@ const FormRegister = ({ dispatch, title,role ,setLogin }: any) => {
         <h1 className=" text-4xl py-3 text-white font-bold font-mono">
           {title}
         </h1>
-        {next === 'input1' && title === "Register"&& (
+        {next === 'input1' && role === "customer"&& (
           <button
             className="text-white text-2xl"
             onClick={() => dispatch(ModalRegisterAction(false))}
