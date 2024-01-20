@@ -42,6 +42,7 @@ const FormRegister = ({ dispatch, title, role, setLogin }: any) => {
   };
   return (
     <section>
+      <button onClick={() => setNext('input3')}>referral</button>
       <div className="bg-[#4f4cee] flex justify-between px-6 mb-4">
         <h1 className=" text-4xl py-3 text-white font-bold font-mono">
           {title}
