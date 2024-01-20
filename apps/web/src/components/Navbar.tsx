@@ -2,7 +2,6 @@
 
 import {
   AuthAction,
-  ModalLoginAction,
   ModalRegisterAction,
 } from '@/lib/features/userSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
@@ -16,18 +15,15 @@ import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const login = useAppSelector((state) => state.user.dataUser);
-  const token = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('token') as string) : null;
-
+  const selector = useAppSelector((state) => state.user.dataUser);
+  
   useEffect(() => {
-    if (token) {
-      handleSesion(token);
-    }
-  }, [token]);
-
-  const handleSesion = async (token: string) => {
+    handleSesion();
+  }, []);
+  
+  const handleSesion = async () => {
     try {
-      const { data } = await useKeepLogin(token);
+      const { data } = useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
       console.log(error);
@@ -41,14 +37,13 @@ const Navbar = () => {
             Karcis.Com
           </h1>
         </Link>
-        {!login.id ? (
+        {!selector.id ? (
           <ul className="flex justify-evenly p-2">
             <li>
               <button
                 className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
-                onClick={() => dispatch(ModalLoginAction(true))}
               >
-                Log In
+               <Link href={"/promoters/join"}>promoter</Link>
               </button>
             </li>
             <li>

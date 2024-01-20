@@ -46,7 +46,7 @@ const ModalSignin = () => {
                   <div className="sm:flex sm:items-start">
                     <div className="w-full">
                       <div>
-                        <FormLogin dispatch={dispatch} role={'customer'} />
+                        <FormLogin dispatch={dispatch} role={'customer'} title={"Login Costumer"}/>
                       </div>
                     </div>
                   </div>

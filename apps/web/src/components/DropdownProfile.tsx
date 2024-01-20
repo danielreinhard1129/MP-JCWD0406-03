@@ -13,8 +13,9 @@ const DropdownProfile = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
   const dispatch = useAppDispatch();
   const handleLogout = async() => {
-    if (selector.role === 'promoter') {
+    if (selector.role?.name === 'promoter') {
       router.push('/promoters/join');
+      alert("success")
     }
     dispatch(LogoutAction());
   };
@@ -32,11 +33,11 @@ const DropdownProfile = () => {
       }
     >
       <Dropdown.Header>
-        <span className="block text-base">
-          {"a"}
+        <span className="block text-base font-medium">
+          {selector?.firstName} {selector?.lastName}
         </span>
         <span className="block truncate text-sm font-medium">
-          {""}
+          {selector?.email}
         </span>
       </Dropdown.Header>
       <Dropdown.Item icon={CgProfile}>Profile</Dropdown.Item>

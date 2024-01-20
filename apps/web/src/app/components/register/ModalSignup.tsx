@@ -48,7 +48,8 @@ const ModalSignup = () => {
                       <div>
                         <FormRegister
                           dispatch={dispatch}
-                          title={'Register'}
+
+                          title={'Join To Buy Events'}
                           role={'customer'}
                         />
                       </div>

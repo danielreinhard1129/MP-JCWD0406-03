@@ -1,4 +1,5 @@
 import { forgotPasswordAction } from '@/actions/users/forgotPasswordAction';
+import { getAllUserAction } from '@/actions/users/getAllUserAction';
 import { keepLoginAction } from '@/actions/users/keepLoginAction';
 import { loginAction } from '@/actions/users/loginAction';
 import { registerAction } from '@/actions/users/registerAction';
@@ -38,11 +39,20 @@ export class UserController {
   async keepLogin(req: Request, res: Response, next: NextFunction) {
     try {
       
-      const data = await keepLoginAction(req.user);
+      const data = await keepLoginAction(req?.user);
       res.status(data.status).send(data);
     } catch (error) {
       console.log(error);
       next(error);
+    }
+  }
+
+  async getAllUser(req: Request, res: Response, next: NextFunction){
+    try {
+      const data = await getAllUserAction();
+      res.send(data)
+    } catch (error) {
+      
     }
   }
 

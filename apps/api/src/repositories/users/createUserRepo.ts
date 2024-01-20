@@ -7,7 +7,7 @@ export const createUser = async (body: IUser) => {
       firstName,
       lastName,
       phoneNumber,
-      codeReferral,
+      referralCode,
       email,
       password,
       role,
@@ -17,7 +17,7 @@ export const createUser = async (body: IUser) => {
         firstName,
         lastName,
         email,
-        codeReferral,
+        referralCode,
         phoneNumber,
         password,
         role: {

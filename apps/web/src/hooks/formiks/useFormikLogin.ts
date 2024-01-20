@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 const useFormikLogin = (role:string) => {
   const dispatch = useDispatch();
+  const router = useRouter()
   const validationSchema = Yup.object().shape({
     phoneNumberOrEmail: Yup.string().required(
       'Phone Number / Email cannot be empty',
@@ -38,6 +39,9 @@ const useFormikLogin = (role:string) => {
           JSON.stringify(data.token),
         );
         toast.success('Success Login');
+        if(role === "promoter"){
+         return router.push("/promoters")
+        }
         dispatch(ModalLoginAction(false));
       } catch (error: any) {
         toast.error(error.response.data.message);
