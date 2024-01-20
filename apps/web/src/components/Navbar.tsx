@@ -41,11 +41,13 @@ const Navbar = () => {
         {!selector.id ? (
           <ul className="flex justify-evenly p-2">
             <li>
+            <Link href={"/promoters/join"}>
               <button
                 className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
               >
-               <Link href={"/promoters/join"}>promoter</Link>
+                promoter
               </button>
+               </Link>
             </li>
             <li>
               <button
