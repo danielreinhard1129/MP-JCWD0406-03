@@ -1,14 +1,12 @@
-import axios from "axios";
+import { axiosInstance } from '@/helper/axios';
 
-export const useKeepLogin = async(token:string) => {
-    try {
-        const {data} = await axios.get('http://localhost:8000/api/users/keep-login',{
-            headers: {
-                "Authorization": "Bearer " + token
-            }
-        })
-        return data
-    } catch (error) {
-        console.log(error); 
-    }
-}
+export const useKeepLogin = async () => {
+  try {
+    const { data } = await axiosInstance.get(
+      'http://localhost:8000/api/users/keep-login'
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -16,18 +16,15 @@ import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const login = useAppSelector((state) => state.user.dataUser);
-  const token = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('token') as string) : null;
+  const selector = useAppSelector((state) => state.user.dataUser);
 
   useEffect(() => {
-    if (token) {
-      handleSesion(token);
-    }
-  }, [token]);
+      handleSesion();
+  }, []);
 
-  const handleSesion = async (token: string) => {
+  const handleSesion = async () => {
     try {
-      const { data } = await useKeepLogin(token);
+      const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
       console.log(error);
@@ -41,7 +38,7 @@ const Navbar = () => {
             Karcis.Com
           </h1>
         </Link>
-        {!login.id ? (
+        {!selector.id ? (
           <ul className="flex justify-evenly p-2">
             <li>
               <button

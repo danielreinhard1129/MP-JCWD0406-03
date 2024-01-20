@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface UserState {
   id: number | null;
+  firstName: string;
+  lastName: string;
   email: String;
   role: RoleSate ;
 }
@@ -14,6 +16,8 @@ interface RoleSate {
 
 const dataUser: UserState = {
   id: null,
+  firstName: '',
+  lastName: '',
   email: '',
   role: {
     id: null,
@@ -43,6 +47,8 @@ export const userSlice = createSlice({
 
     AuthAction: (state, action: PayloadAction<UserState>) => {
       state.dataUser.id = action.payload.id;
+      state.dataUser.firstName = action.payload.firstName;
+      state.dataUser.lastName = action.payload.lastName;
       state.dataUser.email = action.payload.email;
       state.dataUser.role = action.payload.role;
     },

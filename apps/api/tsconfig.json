@@ -19,5 +19,4 @@
   // "include": ["src/**/*"],
   "include": ["**/*.ts"],
   "exclude": ["node_modules"],
-  "files":["types.d.ts"]
 }
