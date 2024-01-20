@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const baseURL = '';
+const baseURL = process.env.BASE_URl!;
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL,
@@ -8,8 +8,8 @@ export const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('');
-
+    const token = JSON.parse(localStorage.getItem('token') as string);
+    
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

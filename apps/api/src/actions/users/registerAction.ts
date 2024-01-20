@@ -7,6 +7,18 @@ import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { findUserByPhoneNumber } from '@/repositories/users/findUserByPhoneNumber';
 import { IUser } from '@/util/user.type';
 
+interface PayloadToken {
+  email: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: PayloadToken;
+    }
+  }
+}
+
 export const registerAction = async (body: IUser) => {
   try {
     const checkPhoneNumber = await findUserByPhoneNumber(body.phoneNumber);
@@ -27,7 +39,9 @@ export const registerAction = async (body: IUser) => {
     }
 
     body.password = await hashPaswword(body.password);
-    body.codeReferral = nanoid();
+    if (body.role !== 'promoter') {
+      body.referralCode = nanoid();
+    }
 
     const user = await createUser(body);
 

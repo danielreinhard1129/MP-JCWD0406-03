@@ -1,5 +1,4 @@
 import { RewardController } from '@/controllers/reward.controller';
-import { SampleController } from '@/controllers/sample.controller';
 import { Router } from 'express';
 
 export class RewardRouter {
@@ -13,6 +12,7 @@ export class RewardRouter {
   }
 
   private initializeRoutes(): void {
+    this.router.post('/check-referral-code',this.rewardController.checkReferralCode)
     this.router.post('/use-referral-code',this.rewardController.useReferralCode)
   }
 

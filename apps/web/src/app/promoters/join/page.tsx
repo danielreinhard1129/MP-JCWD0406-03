@@ -17,12 +17,12 @@ const Register = () => {
 
   useEffect(() => {
 
-    if (role.id && role?.name === 'customer') router.push('/');
-    if (role.id && role?.name === 'promoter') router.push('/promoters');
+    if (role?.id && role?.name === 'customer') router.push('/');
+    if (role?.id && role?.name === 'promoter') router.push('/promoters');
   }, [role]);
   return (
     <section className="flex justify-center items-center h-screen">
-      {!role.id && (
+      {!role?.id && (
         <div className="border-2 flex">
           <div className="border-2 ">
             {!login ? (

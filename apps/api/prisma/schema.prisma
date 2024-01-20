@@ -11,27 +11,47 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
-  phoneNumber String @unique
-  email     String   @unique
-  password String
-  role Role?
-  referralCode String @unique 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  isDeleted Boolean @default(false)
+  id            Int      @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  phoneNumber   String   @unique
+  email         String   @unique
+  password      String
+  role          Role?
+  referralCode  String   @unique 
+  cuponDiscount CouponDiscount?
+  referrerUser      ReferralPoints[] @relation("Referrer")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isDeleted     Boolean  @default(false)
 }
 
 model Role {
   id        Int      @id @default(autoincrement())
-  name String 
-  userId Int @unique
+  name      String 
+  userId    Int @unique
   user User @relation(fields: [userId],references: [id])
 }
 
+model CouponDiscount {
+  id        Int      @id @default(autoincrement())
+  userId  Int @unique
+  user User @relation(fields: [userId],references: [id])
+  couponCode  String
+  discountPersentase Int
+  dateReceived DateTime @default(now())
+  expiresOn DateTime
+}
 
+model ReferralPoints {
+  id        Int      @id @default(autoincrement())
+  referrerUserId Int 
+  referredUserId  Int @unique
+  pointEarned Int
+  dateEarned        DateTime @default(now())
+  expiresOn DateTime
+  referrerUser      User        @relation("Referrer", fields: [referrerUserId], references: [id])
+}
 
 model Sample {
   id        Int      @id @default(autoincrement())

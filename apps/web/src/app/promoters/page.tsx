@@ -11,10 +11,10 @@ const Promoters = () => {
     authen();
   }, []);
   const authen = () => {
-    if (selector?.role.name === 'customer') return router.push('/');
-    if (!selector?.role.name) return router.push('/promoters/join');
+    if (selector?.role?.name === 'customer') return router.push('/');
+    if (!selector?.role?.name) return router.push('/promoters/join');
   };
-  return <section>{selector.role.name !== 'customer' && <div>Admin</div>}</section>;
+  return <section>{selector.role?.name !== 'customer' && <div>Admin</div>}</section>;
 };
 
 export default Promoters;
