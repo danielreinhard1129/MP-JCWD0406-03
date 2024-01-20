@@ -1,6 +1,10 @@
 import { AuthAction, ModalLoginAction } from '@/lib/features/userSlice';
 import axios from 'axios';
 import { useFormik } from 'formik';
+<<<<<<< HEAD
+=======
+import { useRouter } from 'next/navigation';
+>>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
@@ -20,7 +24,11 @@ const useFormikLogin = (role:string) => {
     },
     validationSchema,
 
+<<<<<<< HEAD
     onSubmit: async (values) => {
+=======
+    onSubmit: async (values, {resetForm}) => {
+>>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
       try {
         const { data } = await axios.post(
           'http://localhost:8000/api/users/login',
@@ -29,6 +37,7 @@ const useFormikLogin = (role:string) => {
             password: values.password,
           },
         );
+<<<<<<< HEAD
         console.log(data);
         if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))
         
@@ -39,6 +48,15 @@ const useFormikLogin = (role:string) => {
           JSON.stringify({ data: data.data, token: data.token }),
         );
 
+=======
+        if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))    
+
+        dispatch(AuthAction(data.token));
+        localStorage.setItem(
+          'token',
+          JSON.stringify(data.token),
+        );
+>>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
         toast.success('Success Login');
         dispatch(ModalLoginAction(false));
       } catch (error: any) {

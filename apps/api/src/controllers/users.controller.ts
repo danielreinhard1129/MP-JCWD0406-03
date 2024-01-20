@@ -1,4 +1,5 @@
 import { forgotPasswordAction } from '@/actions/users/forgotPasswordAction';
+import { keepLoginAction } from '@/actions/users/keepLoginAction';
 import { loginAction } from '@/actions/users/loginAction';
 import { registerAction } from '@/actions/users/registerAction';
 import { updatePasswordAction } from '@/actions/users/updatePasswordAction';
@@ -28,6 +29,17 @@ export class UserController {
   async isValid(req: Request, res: Response, next: NextFunction) {
     try {
       return res.status(200).send(true);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async keepLogin(req: Request, res: Response, next: NextFunction) {
+    try {
+      
+      const data = await keepLoginAction(req.user);
+      res.status(data.status).send(data);
     } catch (error) {
       console.log(error);
       next(error);
