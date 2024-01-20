@@ -1,12 +1,13 @@
 export interface IEvent {
   id: number;
-  event_name: string;
-  price: string;
+  tittle: string;
+  price: number;
   dateTime: Date;
   location: string;
   description: string;
-  availableSeat: string;
+  availableSeat: number;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   category: string;
+  banner: string;
 }

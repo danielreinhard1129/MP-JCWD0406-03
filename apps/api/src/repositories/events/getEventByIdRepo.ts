@@ -1,11 +1,11 @@
 import prisma from '@/prisma';
 
-export const getEventById = async (id: number) => {
+export const getEventByIdRepo = async (id: number) => {
   try {
-    const allEvent = await prisma.event.findMany({
+    const event = await prisma.event.findUnique({
       where: { id },
     });
-    return allEvent;
+    return event;
   } catch (error) {
     console.log(error);
     throw error;

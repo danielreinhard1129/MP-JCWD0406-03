@@ -9,7 +9,7 @@ import HomePage from './home/page';
 function Home() {
   const selector = useAppSelector((state) => state.user.dataUser);
   const router = useRouter();
-  const role = selector?.data.role?.name;
+  const role = selector?.role;
   useEffect(() => {
     authen();
   }, []);

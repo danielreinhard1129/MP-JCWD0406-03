@@ -1,17 +1,17 @@
-import { getEventById } from "@/repositories/events/getEventById";
+import { getEventByIdRepo } from '@/repositories/events/getEventByIdRepo';
 
 export const getEventByIdAction = async (id: number) => {
   try {
-    const event = await getEventById(id);
+    const event = await getEventByIdRepo(id);
     if (!event) {
       return {
         status: 400,
-        message: "Event not found",
+        message: 'Event not found',
       };
     }
     return {
       status: 200,
-      message: "success",
+      message: 'success',
       data: event,
     };
   } catch (error) {

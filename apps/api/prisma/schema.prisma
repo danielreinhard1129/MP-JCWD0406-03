@@ -43,7 +43,7 @@ model Sample {
 
 model Event {
   id            Int      @id @default(autoincrement())
-  event_name    String
+  tittle        String
   price         Float
   dateTime      DateTime
   location      String
@@ -52,4 +52,7 @@ model Event {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   category      String
+  banner        String
+
+  @@map("events")
 }
