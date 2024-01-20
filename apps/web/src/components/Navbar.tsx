@@ -1,10 +1,7 @@
 'use client';
 
 import {
-<<<<<<< HEAD
-=======
   AuthAction,
->>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
   ModalLoginAction,
   ModalRegisterAction,
 } from '@/lib/features/userSlice';
@@ -14,18 +11,12 @@ import ModalSignin from '../app/components/login/ModalSignin';
 import ModalSignup from '../app/components/register/ModalSignup';
 import Link from 'next/link';
 import ModalForgotPassword from '@/app/components/forgotPassword/ModalForgotPassword';
-<<<<<<< HEAD
-=======
 import { useEffect } from 'react';
 import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
->>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const login = useAppSelector((state) => state.user.dataUser);
-<<<<<<< HEAD
-
-=======
   const token = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('token') as string) : null;
 
   useEffect(() => {
@@ -42,7 +33,6 @@ const Navbar = () => {
       console.log(error);
     }
   };
->>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
   return (
     <section>
       <nav className="flex justify-between w-full p-5 shadow-md">
@@ -51,11 +41,7 @@ const Navbar = () => {
             Karcis.Com
           </h1>
         </Link>
-<<<<<<< HEAD
-        {!login?.data ? (
-=======
         {!login.id ? (
->>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
           <ul className="flex justify-evenly p-2">
             <li>
               <button
