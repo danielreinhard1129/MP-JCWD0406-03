@@ -5,26 +5,13 @@ import FormRegister from '@/components/FormRegister';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import React, { useEffect, useState } from 'react';
->>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
 
 const Register = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
   const [login, setLogin] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const dispatch = useAppDispatch();
-<<<<<<< HEAD
-  const role = selector?.data.role?.name;
-  const router = useRouter();
-  if (selector && role === 'customer') router.push('/');
-  if (selector && role === 'promoter') router.push('/promoters');
-  return (
-    <section className="flex justify-center items-center h-screen">
-      {!selector && (
-=======
   const router = useRouter();
   
   
@@ -32,11 +19,10 @@ const Register = () => {
 
     if (selector.id && selector.role?.name === 'customer') router.push('/');
     if (selector.id && selector.role?.name === 'promoter') router.push('/promoters');
-  }, [selector]);
+  }, []);
   return (
     <section className="flex justify-center items-center h-screen">
       {!selector.id && (
->>>>>>> 4ea1091d4d5ae3582affc73549e522ebbe582b92
         <div className="border-2 flex">
           <div className="border-2 ">
             {!login ? (
