@@ -1,26 +1,20 @@
-
 'use client';
-
 import { useAppSelector } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import HomePage from './home/page';
 
 function Home() {
-  const selector = useAppSelector((state) => state.user.dataUser);
-  const router = useRouter();
-  const role = selector?.role;
+  const role = useAppSelector((state) => state.user.dataUser.role)
+  const router = useRouter()
+  console.log(role);
+  
   useEffect(() => {
-    authen();
-  }, []);
-  const authen = () => {
-    if (role === 'promoter') router.push('/promoters');
-  };
-  return (
-    <main>
-      <HomePage />
-    </main>
-  );
+    if(role?.name === "promoter"){
+      router.push("/promoters")
+    }
+  },[role]);
+  return <main></main>;
 }
 
 export default Home;
