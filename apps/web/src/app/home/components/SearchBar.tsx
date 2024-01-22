@@ -1,17 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchBar: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 800);
 
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      searchTerm;
-    }, 800);
+    console.log('Searching for:', debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
 
-    return () => clearTimeout(delayDebounce);
-  }, [searchTerm]);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <div className="mt-[-40px] mx-auto">
@@ -20,7 +23,7 @@ const SearchBar = () => {
           type="text"
           className="w-full p-4 text-xl rounded-md border-2 border-gray-200"
           placeholder="Search for events, artists, or locations"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleInputChange}
         />
       </div>
     </div>

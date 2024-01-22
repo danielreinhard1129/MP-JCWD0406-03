@@ -1,14 +1,15 @@
 'use client';
 
+'use client';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { eventList } from '../api/api';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Badge } from 'flowbite-react';
 import { IoLocation } from 'react-icons/io5';
 import { FaMoneyBillWave } from 'react-icons/fa6';
+import { eventList } from '../home/api/api';
 
 interface Event {
   id: string;
@@ -21,7 +22,7 @@ interface Event {
   description: string;
 }
 
-const UpcomingEvents: React.FC = () => {
+const AllEvent: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const router = useRouter();
 
@@ -42,18 +43,10 @@ const UpcomingEvents: React.FC = () => {
     router.push(`/event-detail/${eventId}`);
   };
 
-  const handleSeeMoreClick = () => {
-    // Navigasi ke halaman lain saat tombol "See more" diklik
-    router.push('/find-event');
-  };
-
-  // Menampilkan hanya dua event pertama
-  const displayedEvents = events.slice(0, 2);
-
   return (
     <section>
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6">Upcoming Events</h2>
+        <h2 className="text-2xl font-bold mb-6">Events</h2>
         <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  gap-4">
           {events.map((event) => (
             <div
@@ -98,16 +91,10 @@ const UpcomingEvents: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="text-center mt-8">
-          <Link href="/find-event">
-            <button className="text-black px-6 py-2 border-solid border-2 border-[#e4e7eb] transition duration-300 mx-auto">
-              See more
-            </button>
-          </Link>
-        </div>
+        <div className="text-center mt-8"></div>
       </div>
     </section>
   );
 };
 
-export default UpcomingEvents;
+export default AllEvent;

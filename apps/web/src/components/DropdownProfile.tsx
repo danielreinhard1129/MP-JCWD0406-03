@@ -16,8 +16,10 @@ const DropdownProfile = () => {
     if (selector.role?.name === 'promoter') {
       router.push('/promoters/join');
       alert("success")
+      return;
     }
     dispatch(LogoutAction());
+    router.push("/")
   };
   return (
     <Dropdown

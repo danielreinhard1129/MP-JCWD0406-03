@@ -1,4 +1,5 @@
 import { Button } from 'flowbite-react';
+import Link from 'next/link';
 import React from 'react';
 
 const HeaderBanner = () => {
@@ -22,7 +23,9 @@ const HeaderBanner = () => {
             Explore the best events and live experiences
           </p>
           <div className=" flex justify-center ">
-            <Button className="mt-8">Find your next event</Button>
+            <Link href="/find-event">
+              <Button className="mt-8">Find your next event</Button>
+            </Link>
           </div>
         </div>
       </div>

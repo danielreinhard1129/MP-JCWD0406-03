@@ -7,8 +7,15 @@ import { NextFunction, Request, Response } from 'express';
 
 export class EventController {
   async getEvents(req: Request, res: Response, next: NextFunction) {
+    const { category } = req.query;
+
     try {
-      const result = await allEventsAction();
+      let result;
+      if (category !== '') {
+        result = await getEventsByCategoryAction(category as string);
+      } else {
+        result = await allEventsAction();
+      }
       res.status(result.status).send(result);
     } catch (error) {
       console.log(error);
@@ -56,11 +63,23 @@ export class EventController {
       const { start, end } = req.query;
       const result = await getEventsByDateAction(
         start as string,
-        end as string
+        end as string,
       );
       res.status(result.status).send(result);
     } catch (error) {
       next(error);
     }
   }
+
+  // async addNewImages(req: Request, res: Response, next: NextFunction) {
+  //   try {
+  //     const { files } = req;
+
+  //     if (!files?.length) throw new Error("No file uploaded");
+
+  //     return res.status(200).send(`File successfully uploaded`);
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 }

@@ -42,6 +42,7 @@ const useFormikLogin = (role:string) => {
         if(role === "promoter"){
          return router.push("/promoters")
         }
+
         dispatch(ModalLoginAction(false));
       } catch (error: any) {
         toast.error(error.response.data.message);

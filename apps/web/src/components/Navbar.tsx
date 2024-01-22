@@ -19,11 +19,12 @@ const Navbar = () => {
   
   useEffect(() => {
     handleSesion();
-  }, []);
+  }, [selector]);
   
   const handleSesion = async () => {
     try {
-      const { data } = useKeepLogin();
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
       console.log(error);

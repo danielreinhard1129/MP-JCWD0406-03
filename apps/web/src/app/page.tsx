@@ -14,7 +14,9 @@ function Home() {
       router.push("/promoters")
     }
   },[role]);
-  return <main></main>;
+  return <main>
+    <HomePage />
+  </main>;
 }
 
 export default Home;
