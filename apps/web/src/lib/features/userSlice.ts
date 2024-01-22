@@ -55,6 +55,7 @@ export const userSlice = createSlice({
 
     LogoutAction: (state) => {
       state.dataUser.id = null;
+      state.dataUser.role.name = ''
       localStorage.removeItem('token');
     },
   },
