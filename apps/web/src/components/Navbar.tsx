@@ -1,9 +1,6 @@
 'use client';
 
-import {
-  AuthAction,
-  ModalRegisterAction,
-} from '@/lib/features/userSlice';
+import { AuthAction, ModalRegisterAction } from '@/lib/features/userSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import DropdownProfile from './DropdownProfile';
 import ModalSignin from '../app/components/login/ModalSignin';
@@ -16,7 +13,7 @@ import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.user.dataUser);
-  
+
   useEffect(() => {
     handleSesion();
   }, []);
@@ -31,8 +28,8 @@ const Navbar = () => {
   };
   return (
     <section>
-      {selector.role.name !== "promoter" ? (
-        <nav className="flex justify-between w-full p-5 shadow-md sticky top-0 bg-white z-50">
+      {selector.role.name !== 'promoter' ? (
+        <nav className="flex justify-between w-full p-5 shadow-md sticky top-0 bg-white ">
           <Link href={'/'}>
             <h1 className="font-bold text-2xl font-sans text-blue-500">
               Karcis.Com
