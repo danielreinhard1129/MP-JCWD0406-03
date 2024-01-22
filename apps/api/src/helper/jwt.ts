@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+import jwt, { Secret } from "jsonwebtoken";
 
-const secretKey = process.env.JWT_SECRET_KEY!;
+const secretKey:Secret = process.env.JWT_SECRET_KEY!;
 
 
-export const createToken = (data: any) => {
+export const createToken = (data: any):string => {
   const expiresIn = "1h";
   return jwt.sign({data}, secretKey, { expiresIn });
 };

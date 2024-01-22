@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 import * as Yup from 'yup';
-const useFormikLogin = (role:string) => {
+const useFormikLogin = () => {
   const dispatch = useDispatch();
   const router = useRouter()
   const validationSchema = Yup.object().shape({
@@ -30,9 +30,7 @@ const useFormikLogin = (role:string) => {
             phoneNumberOrEmail: values.phoneNumberOrEmail,
             password: values.password,
           },
-        );
-        if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))    
-
+        );   
         dispatch(AuthAction(data.data));
         localStorage.setItem(
           'token',
@@ -42,6 +40,7 @@ const useFormikLogin = (role:string) => {
         if(data.data.role.name === "promoter"){
          return router.push("/promoters")
         }
+
         dispatch(ModalLoginAction(false));
         resetForm()
       } catch (error: any) {

@@ -7,13 +7,8 @@ import {
 
 const InputRegister = ({ dispatch, formik, role, setLogin }: any) => {
   const handleChange = () => {
-    if (role === 'customer') {
-      dispatch(ModalLoginAction(true));
-      dispatch(ModalRegisterAction(false));
-    }
-    if (role === 'promoter') {
-      setLogin(true);
-    }
+    dispatch(ModalLoginAction(true));
+    dispatch(ModalRegisterAction(false));
   };
   return (
     <section className="m-10 ">
@@ -38,6 +33,17 @@ const InputRegister = ({ dispatch, formik, role, setLogin }: any) => {
           />
         </div>
       </div>
+      {role === 'promoter' && (
+        <div>
+          <InputFields
+            label="Name Organization"
+            name="nameOrganization"
+            id="nameOrganization"
+            type="text"
+            formik={formik}
+          />
+        </div>
+      )}
       <div className="mb-5">
         <InputFields
           label="Phone Number"

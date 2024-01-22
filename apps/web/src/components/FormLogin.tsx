@@ -7,12 +7,13 @@ import React from 'react';
 import InputLogin from './InputLogin';
 import useFormikLogin from '@/hooks/formiks/useFormikLogin';
 
-const FormLogin = ({ dispatch, role, title, setLogin,setForgotPassword }: any) => {
-  const formik = useFormikLogin(role);
+const FormLogin = ({ dispatch, role,  setLogin,setForgotPassword }: any) => {
+  const formik = useFormikLogin();
   const handleChangeAccount = () => {
     if (role === 'customer') {
       dispatch(ModalLoginAction(false));
       dispatch(ModalRegisterAction(true));
+
     }
     if(role === 'promoter'){
       setLogin(false);
@@ -31,7 +32,7 @@ const FormLogin = ({ dispatch, role, title, setLogin,setForgotPassword }: any) =
   return (
     <section >
       <div className="bg-[#4f4cee] flex justify-between px-6 mb-4  w-full">
-        <h1 className=" text-4xl py-3 text-white font-bold font-mono">{title}</h1>
+        <h1 className=" text-4xl py-3 text-white font-bold font-mono">Login To Karcis</h1>
         {role === 'customer' && (
           <button
             className="text-white text-2xl"
@@ -59,7 +60,7 @@ const FormLogin = ({ dispatch, role, title, setLogin,setForgotPassword }: any) =
           className="text-center hover:underline cursor-pointer my-4"
           onClick={handleChangeAccount}
         >
-          Don't have an account?
+          {"Don't have an account?"}
         </p>
       </form>
     </section>

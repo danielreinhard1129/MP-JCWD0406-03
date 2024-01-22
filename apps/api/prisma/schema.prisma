@@ -18,6 +18,7 @@ model User {
   email         String   @unique
   password      String
   role          Role?
+  nameOrganization String? 
   referralCode  String?    @unique 
   cuponDiscount CouponDiscount?
   referrerUser      ReferralPoints[] @relation("Referrer")
@@ -63,4 +64,20 @@ model Sample {
   updatedAt DateTime @updatedAt
 
   @@map("samples") // if you want to use snake_case format
+}
+
+model Event {
+  id            Int      @id @default(autoincrement())
+  tittle        String
+  price         Float
+  dateTime      DateTime
+  location      String
+  description   String
+  availableSeat Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  category      String
+  banner        String
+
+  @@map("events")
 }
