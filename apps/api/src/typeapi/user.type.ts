@@ -8,6 +8,7 @@ export interface IUser {
   codeReferral: string;
 =======
   role: string;
+  nameOrganization: string;
   referralCode: string;
 >>>>>>> 7ab36c7055cf6312b30e672cce558beb519d64b6
   phoneNumber: string;

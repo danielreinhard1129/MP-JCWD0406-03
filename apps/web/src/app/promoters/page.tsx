@@ -2,7 +2,7 @@ import AdminPage from './components/AdminPage';
 
 const Promoters = () => {
   return (
-    <section>
+    <section >
       <AdminPage />
     </section>
   );
