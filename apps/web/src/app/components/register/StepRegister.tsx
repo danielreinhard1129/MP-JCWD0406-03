@@ -6,7 +6,7 @@ const StepRegister = ({next}:any) => {
           <div className="flex flex-col items-center text-center">
             <div
               className={`border-2  ${
-                next === 'input2'
+                next === 2
                   ? 'bg-green-500 text-white '
                   : 'text-black border-gray-500'
               } w-12 text-center h-12 rounded-full flex flex-col justify-center  font-bold mt-5 mb-2`}
@@ -20,7 +20,7 @@ const StepRegister = ({next}:any) => {
           <div className="flex flex-col items-center text-center">
             <div
               className={`border-2 ${
-                next === 'input3'
+                next === 3
                   ? 'bg-green-500 text-white '
                   : 'text-black border-gray-500'
               } w-12 text-center h-12 rounded-full flex flex-col justify-center font-bold mt-5 mb-2`}
@@ -34,7 +34,7 @@ const StepRegister = ({next}:any) => {
           <div className="flex flex-col items-center text-center">
             <div
               className={`border-2 ${
-                next === 'input4'
+                next === 4
                   ? 'bg-green-500 text-white '
                   : 'text-black border-gray-500'
               } w-12 text-center h-12 rounded-full flex flex-col justify-center  font-bold mb-2`}

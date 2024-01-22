@@ -8,14 +8,8 @@ import useFormikForgotPassword from '@/hooks/formiks/useFormikForgotPassword';
 const FormForgotPassword = ({ dispatch, role ,setLogin, setForgotPassword }: any) => {
   const formik = useFormikForgotPassword();
   const handleClick = () => {
-    if (role === 'customer') {
       dispatch(ModalForgotPasswordAction(false));
       dispatch(ModalLoginAction(true));
-    }
-    if(role === "promoter"){
-      setLogin(true)
-      setForgotPassword(false)
-    }
   };
   return (
     <section>
