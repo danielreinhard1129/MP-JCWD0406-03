@@ -12,14 +12,11 @@ const DropdownProfile = () => {
   const router = useRouter();
   const selector = useAppSelector((state) => state.user.dataUser);
   const dispatch = useAppDispatch();
-  const handleLogout = async() => {
+  const handleLogout = async () => {
+    dispatch(LogoutAction());
     if (selector.role?.name === 'promoter') {
       router.push('/promoters/join');
-      alert("success")
-      return;
     }
-    dispatch(LogoutAction());
-    router.push("/")
   };
   return (
     <Dropdown
@@ -33,8 +30,9 @@ const DropdownProfile = () => {
           rounded
         />
       }
+    
     >
-      <Dropdown.Header>
+      <Dropdown.Header className="bg-white">
         <span className="block text-base font-medium">
           {selector?.firstName} {selector?.lastName}
         </span>
