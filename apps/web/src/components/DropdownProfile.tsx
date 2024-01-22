@@ -13,11 +13,11 @@ const DropdownProfile = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
   const dispatch = useAppDispatch();
   const handleLogout = async() => {
+    dispatch(LogoutAction());
     if (selector.role?.name === 'promoter') {
       router.push('/promoters/join');
       alert("success")
     }
-    dispatch(LogoutAction());
   };
   return (
     <Dropdown

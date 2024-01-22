@@ -18,7 +18,7 @@ model User {
   email         String   @unique
   password      String
   role          Role?
-  referralCode  String   @unique 
+  referralCode  String    @unique 
   cuponDiscount CouponDiscount?
   referrerUser      ReferralPoints[] @relation("Referrer")
   createdAt     DateTime @default(now())
