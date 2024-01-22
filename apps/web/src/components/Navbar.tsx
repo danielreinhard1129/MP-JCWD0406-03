@@ -32,8 +32,8 @@ const Navbar = () => {
   };
   return (
     <section>
-      {selector.role.name !== "promoter" ? (
-        <nav className="flex justify-between w-full p-5 shadow-md sticky top-0 bg-white z-50">
+      {selector.role.name !== 'promoter' ? (
+        <nav className="flex justify-between w-full p-5 shadow-lg sticky top-0 bg-white ">
           <Link href={'/'}>
             <h1 className="font-bold text-2xl font-sans text-blue-500">
               Karcis.Com
@@ -42,11 +42,12 @@ const Navbar = () => {
           {!selector.id ? (
             <ul className="flex justify-evenly p-2">
               <li>
-                <Link href={'/promoters/join'}>
-                  <button className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg">
-                    promoter
-                  </button>
-                </Link>
+                <button
+                  className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
+                  onClick={() => dispatch(ModalLoginAction(true))}
+                >
+                  Sign In
+                </button>
               </li>
               <li>
                 <button

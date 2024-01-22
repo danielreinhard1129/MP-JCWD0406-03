@@ -6,6 +6,7 @@ export const createUser = async (body: IUser) => {
     const {
       firstName,
       lastName,
+      nameOrganization,
       phoneNumber,
       referralCode,
       email,
@@ -16,6 +17,7 @@ export const createUser = async (body: IUser) => {
       data: {
         firstName,
         lastName,
+        nameOrganization,
         email,
         referralCode,
         phoneNumber,
