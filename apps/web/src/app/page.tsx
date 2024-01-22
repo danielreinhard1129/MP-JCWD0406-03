@@ -2,6 +2,7 @@
 import { useAppSelector } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import HomePage from './home/page';
 
 function Home() {
   const role = useAppSelector((state) => state.user.dataUser.role)
@@ -13,7 +14,9 @@ function Home() {
       router.push("/promoters")
     }
   },[role]);
-  return <main></main>;
+  return <main>
+    <HomePage />
+  </main>;
 }
 
 export default Home;
