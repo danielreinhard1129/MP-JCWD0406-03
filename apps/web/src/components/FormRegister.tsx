@@ -32,8 +32,8 @@ const FormRegister = ({ dispatch, title, role, setLogin }: any) => {
             userId,
           },
         );
+        toast.success("Congratulations you earned 10% coupon discont")
       }
-      toast.success("Congratulations you earned 10% coupon discont")
       setNext('input4');
     } catch (error) {
       console.log(error);
