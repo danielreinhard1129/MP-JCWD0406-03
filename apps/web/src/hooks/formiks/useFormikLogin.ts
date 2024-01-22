@@ -33,16 +33,18 @@ const useFormikLogin = (role:string) => {
         );
         if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))    
 
-        dispatch(AuthAction(data.token));
+        dispatch(AuthAction(data.data));
         localStorage.setItem(
           'token',
           JSON.stringify(data.token),
         );
         toast.success('Success Login');
-        if(role === "promoter"){
+        if(data.data.role.name === "promoter"){
          return router.push("/promoters")
         }
+
         dispatch(ModalLoginAction(false));
+        resetForm()
       } catch (error: any) {
         toast.error(error.response.data.message);
       }

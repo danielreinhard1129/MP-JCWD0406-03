@@ -8,6 +8,7 @@ const InputReferralCode = ({formik , isUseReferralCode}:any) => {
               <InputFields
                 label="Masukan Kode Referal (optional)"
                 name="referralCode"
+                disabled={isUseReferralCode}
                 type="text"
                 id="referralCode"
                 formik={formik}

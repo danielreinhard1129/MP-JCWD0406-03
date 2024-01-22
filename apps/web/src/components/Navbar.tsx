@@ -20,10 +20,10 @@ const Navbar = () => {
   useEffect(() => {
     handleSesion();
   }, []);
-  
   const handleSesion = async () => {
     try {
-      const { data } = useKeepLogin();
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
       console.log(error);
@@ -31,39 +31,41 @@ const Navbar = () => {
   };
   return (
     <section>
-      <nav className="flex justify-between w-full p-5 shadow-md">
-        <Link href={'/'}>
-          <h1 className="font-bold text-2xl font-sans text-blue-500">
-            Karcis.Com
-          </h1>
-        </Link>
-        {!selector.id ? (
-          <ul className="flex justify-evenly p-2">
-            <li>
-            <Link href={"/promoters/join"}>
-              <button
-                className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
-              >
-                promoter
-              </button>
-               </Link>
-            </li>
-            <li>
-              <button
-                className="border-2 font-medium bg-blue-600 text-white px-4 py-1 rounded-lg"
-                onClick={() => dispatch(ModalRegisterAction(true))}
-              >
-                Sign Up
-              </button>
-            </li>
-          </ul>
-        ) : (
-          <DropdownProfile />
-        )}
-        <ModalSignin />
-        <ModalSignup />
-        <ModalForgotPassword />
-      </nav>
+      {selector.role.name !== "promoter" ? (
+        <nav className="flex justify-between w-full p-5 shadow-md sticky top-0 bg-white z-50">
+          <Link href={'/'}>
+            <h1 className="font-bold text-2xl font-sans text-blue-500">
+              Karcis.Com
+            </h1>
+          </Link>
+          {!selector.id ? (
+            <ul className="flex justify-evenly p-2">
+              <li>
+                <Link href={'/promoters/join'}>
+                  <button className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg">
+                    promoter
+                  </button>
+                </Link>
+              </li>
+              <li>
+                <button
+                  className="border-2 font-medium bg-blue-600 text-white px-4 py-1 rounded-lg"
+                  onClick={() => dispatch(ModalRegisterAction(true))}
+                >
+                  Sign Up
+                </button>
+              </li>
+            </ul>
+          ) : (
+            <DropdownProfile />
+          )}
+          <ModalSignin />
+          <ModalSignup />
+          <ModalForgotPassword />
+        </nav>
+      ) : (
+        <div></div>
+      )}
     </section>
   );
 };
