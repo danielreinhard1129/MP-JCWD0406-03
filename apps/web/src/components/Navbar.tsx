@@ -2,6 +2,7 @@
 
 import {
   AuthAction,
+  ModalLoginAction,
   ModalRegisterAction,
 } from '@/lib/features/userSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
