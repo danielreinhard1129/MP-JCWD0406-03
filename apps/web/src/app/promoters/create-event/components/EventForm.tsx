@@ -1,5 +1,6 @@
 'use client';
 
+import { PromoterGuard } from '@/helper/HOC/AdminGuard';
 import { baseUrl } from '@/utils/config';
 import axios, { AxiosError } from 'axios';
 import { TextInput } from 'flowbite-react';
@@ -228,4 +229,4 @@ const EventForm: React.FC = () => {
   );
 };
 
-export default EventForm;
+export default PromoterGuard(EventForm);
