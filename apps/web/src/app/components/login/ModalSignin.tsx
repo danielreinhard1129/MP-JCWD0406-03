@@ -14,7 +14,7 @@ const ModalSignin = () => {
     <Transition.Root show={selectorModal} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={ModalLoginAction}
       >
