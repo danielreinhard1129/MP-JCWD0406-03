@@ -1,4 +1,4 @@
-import { AuthAction } from '@/lib/features/userSlice';
+import { AuthAction, ModalRegisterAction } from '@/lib/features/userSlice';
 import { useAppDispatch } from '@/lib/hooks';
 import axios from 'axios';
 import { useFormik } from 'formik';
@@ -63,7 +63,10 @@ const useFormikRegister = (setNext: CallableFunction, role: string) => {
           JSON.stringify(data.token),
         );
 
-        setNext(2);
+        if(data.data.role.name === "customer") {
+          setNext(2);
+        }
+        dispatch(ModalRegisterAction(false))
       } catch (error: any) {
         toast.error(error.response.data.message);
       }

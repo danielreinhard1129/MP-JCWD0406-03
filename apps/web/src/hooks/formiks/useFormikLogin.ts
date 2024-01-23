@@ -36,7 +36,9 @@ const useFormikLogin = () => {
           'token',
           JSON.stringify(data.token),
         );
+        
         toast.success('Success Login');
+
         if(data.data.role.name === "promoter"){
          return router.push("/promoters")
         }
