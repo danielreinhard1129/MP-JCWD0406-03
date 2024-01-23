@@ -5,7 +5,7 @@ import {
   ModalRegisterAction,
 } from '@/lib/features/userSlice';
 
-const InputRegister = ({ dispatch, formik, role, setLogin }: any) => {
+const InputRegister = ({ dispatch, formik, role }: any) => {
   const handleChange = () => {
     dispatch(ModalLoginAction(true));
     dispatch(ModalRegisterAction(false));
