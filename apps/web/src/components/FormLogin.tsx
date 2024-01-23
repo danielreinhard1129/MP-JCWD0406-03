@@ -13,6 +13,7 @@ const FormLogin = ({ dispatch, role,  setLogin,setForgotPassword }: any) => {
     if (role === 'customer') {
       dispatch(ModalLoginAction(false));
       dispatch(ModalRegisterAction(true));
+
     }
     if(role === 'promoter'){
       setLogin(false);
@@ -59,7 +60,7 @@ const FormLogin = ({ dispatch, role,  setLogin,setForgotPassword }: any) => {
           className="text-center hover:underline cursor-pointer my-4"
           onClick={handleChangeAccount}
         >
-          Don't have an account?
+          {"Don't have an account?"}
         </p>
       </form>
     </section>

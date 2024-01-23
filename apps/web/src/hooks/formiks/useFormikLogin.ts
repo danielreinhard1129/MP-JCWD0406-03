@@ -40,6 +40,7 @@ const useFormikLogin = () => {
         if(data.data.role.name === "promoter"){
          return router.push("/promoters")
         }
+
         dispatch(ModalLoginAction(false));
         resetForm()
       } catch (error: any) {

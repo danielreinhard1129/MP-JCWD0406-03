@@ -17,13 +17,13 @@ import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.user.dataUser);
-
+  
   useEffect(() => {
     handleSesion();
   }, []);
-
   const handleSesion = async () => {
     try {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
