@@ -1,6 +1,10 @@
 'use client';
 
-import { AuthAction, ModalRegisterAction } from '@/lib/features/userSlice';
+import {
+  AuthAction,
+  ModalLoginAction,
+  ModalRegisterAction,
+} from '@/lib/features/userSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import DropdownProfile from './DropdownProfile';
 import ModalSignin from '../app/components/login/ModalSignin';
@@ -29,11 +33,7 @@ const Navbar = () => {
   return (
     <section>
       {selector.role.name !== 'promoter' ? (
-<<<<<<< HEAD
-        <nav className="flex justify-between w-full p-5 shadow-md sticky top-0 bg-white ">
-=======
         <nav className="flex justify-between w-full p-5 shadow-lg sticky top-0 bg-white ">
->>>>>>> 706f0322fc6fb13673158863331977b6bdfb3863
           <Link href={'/'}>
             <h1 className="font-bold text-2xl font-sans text-blue-500">
               Karcis.Com
