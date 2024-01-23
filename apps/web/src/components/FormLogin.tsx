@@ -32,7 +32,7 @@ const FormLogin = ({ dispatch, role, setLogin, setForgotPassword }: any) => {
   return (
     <section>
       <div className="bg-[#4f4cee] flex justify-between px-6 mb-4  w-full">
-        <h1 className=" text-4xl py-3 text-white font-bold font-mono">
+        <h1 className="md:text-4xl py-3 text-white font-bold font-mono">
           Login To Karcis
         </h1>
         {role === 'customer' && (

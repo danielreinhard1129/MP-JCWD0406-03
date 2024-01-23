@@ -12,7 +12,7 @@ const InputRegister = ({ dispatch, formik, role }: any) => {
   };
   return (
     <section className="m-10 ">
-      <div className="mb-5 flex ">
+      <div className="mb-5 flex">
         <div className="mr-6">
           <InputFields
             label="First Name"

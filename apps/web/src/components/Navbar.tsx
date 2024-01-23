@@ -13,17 +13,17 @@ import Link from 'next/link';
 import ModalForgotPassword from '@/app/components/forgotPassword/ModalForgotPassword';
 import { useEffect } from 'react';
 import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
+import { Navbar } from 'flowbite-react';
 
-const Navbar = () => {
+const NavbarHome = () => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.user.dataUser);
-  
+
   useEffect(() => {
     handleSesion();
   }, []);
   const handleSesion = async () => {
     try {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
       const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
@@ -31,45 +31,46 @@ const Navbar = () => {
     }
   };
   return (
-    <section>
-      {selector.role.name !== 'promoter' ? (
-        <nav className="flex justify-between w-full p-5 shadow-lg sticky top-0 bg-white ">
-          <Link href={'/'}>
-            <h1 className="font-bold text-2xl font-sans text-blue-500">
-              Karcis.Com
-            </h1>
-          </Link>
-          {!selector.id ? (
-            <ul className="flex justify-evenly p-2">
-              <li>
-                <button
-                  className="mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
-                  onClick={() => dispatch(ModalLoginAction(true))}
-                >
-                  Sign In
-                </button>
-              </li>
-              <li>
-                <button
-                  className="border-2 font-medium bg-blue-600 text-white px-4 py-1 rounded-lg"
-                  onClick={() => dispatch(ModalRegisterAction(true))}
-                >
-                  Sign Up
-                </button>
-              </li>
-            </ul>
+    <section className="sticky top-0 z-40">
+      {!selector.id && (
+        <div className="flex justify-between w-full p-5 shadow-lg  bg-white ">
+          {selector.role.name !== 'promoter' ? (
+            <Navbar className="flex justify-between w-full">
+              <Navbar.Brand href={'/'}>
+                <h1 className="font-bold text-2xl font-sans text-blue-500">
+                  Karcis.Com
+                </h1>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+              <Navbar.Collapse className='text-end'>
+                <Navbar.Link>
+                  <button
+                    className="md:mr-8 bg-white text-black border-2 font-medium border-gray-400 hover:bg-blue-600 hover:text-white px-4 py-1 rounded-lg"
+                    onClick={() => dispatch(ModalLoginAction(true))}
+                  >
+                    Sign In
+                  </button>
+                </Navbar.Link>
+                <Navbar.Link>
+                  <button
+                    className="border-2 font-medium bg-blue-600 text-white px-4 py-1 rounded-lg"
+                    onClick={() => dispatch(ModalRegisterAction(true))}
+                  >
+                    Sign Up
+                  </button>
+                </Navbar.Link>
+              </Navbar.Collapse>
+            </Navbar>
           ) : (
             <DropdownProfile />
           )}
           <ModalSignin />
           <ModalSignup />
           <ModalForgotPassword />
-        </nav>
-      ) : (
-        <div></div>
+        </div>
       )}
     </section>
   );
 };
 
-export default Navbar;
+export default NavbarHome;
