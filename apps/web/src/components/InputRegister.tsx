@@ -5,14 +5,14 @@ import {
   ModalRegisterAction,
 } from '@/lib/features/userSlice';
 
-const InputRegister = ({ dispatch, formik, role, setLogin }: any) => {
+const InputRegister = ({ dispatch, formik, role }: any) => {
   const handleChange = () => {
     dispatch(ModalLoginAction(true));
     dispatch(ModalRegisterAction(false));
   };
   return (
     <section className="m-10 ">
-      <div className="mb-5 flex ">
+      <div className="mb-5 flex">
         <div className="mr-6">
           <InputFields
             label="First Name"

@@ -1,14 +1,13 @@
 import { AuthAction, ModalLoginAction } from '@/lib/features/userSlice';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 import * as Yup from 'yup';
 const useFormikLogin = () => {
   const dispatch = useDispatch();
-  const router = useRouter()
   const validationSchema = Yup.object().shape({
     phoneNumberOrEmail: Yup.string().required(
       'Phone Number / Email cannot be empty',
@@ -22,7 +21,7 @@ const useFormikLogin = () => {
     },
     validationSchema,
 
-    onSubmit: async (values, {resetForm}) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         const { data } = await axios.post(
           'http://localhost:8000/api/users/login',
@@ -30,19 +29,17 @@ const useFormikLogin = () => {
             phoneNumberOrEmail: values.phoneNumberOrEmail,
             password: values.password,
           },
-        );   
-        dispatch(AuthAction(data.data));
-        localStorage.setItem(
-          'token',
-          JSON.stringify(data.token),
         );
+        dispatch(AuthAction(data.data));
+        localStorage.setItem('token', JSON.stringify(data.token));
+
         toast.success('Success Login');
-        if(data.data.role.name === "promoter"){
-         return router.push("/promoters")
+        if (data.data.role.name === 'promoter') {
+          redirect('/promoters');
         }
 
         dispatch(ModalLoginAction(false));
-        resetForm()
+        resetForm();
       } catch (error: any) {
         toast.error(error.response.data.message);
       }
