@@ -1,5 +1,5 @@
 'use client';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useRef} from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import FormRegister from '../../../components/FormRegister';
@@ -14,7 +14,7 @@ const ModalSignup = () => {
     <Transition.Root show={selectorModal} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-40"
         initialFocus={cancelButtonRef}
         onClose={ModalRegisterAction}
       >
@@ -44,11 +44,11 @@ const ModalSignup = () => {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg border-2 border-[#4F4CEE] bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="mb-5">
                   <div className="sm:flex sm:items-start">
-                    <div className="w-full">
+                    <div className="w-full ">
                       <div>
                         <FormRegister
                           dispatch={dispatch}
-
+                          className={"bg-[#4f4cee] flex justify-between px-6 mb-4 rounded-tl-lg "}
                           title={'Join To Buy Events'}
                           role={'customer'}
                         />

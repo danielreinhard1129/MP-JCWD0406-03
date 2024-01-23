@@ -54,7 +54,7 @@ const Statisticts = () => {
       <div className="col-span-2 flex justify-center border-t-2">
         <div>
           <h1 className="font-bold text-xl p-2 mb-2"> {'->'} Data per Day</h1>
-          <LineChart width={1500} height={300} data={data}>
+          <LineChart width={700} height={300} data={data}>
             <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
             <XAxis dataKey="month" />
             <YAxis />

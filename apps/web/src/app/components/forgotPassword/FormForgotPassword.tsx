@@ -2,20 +2,15 @@ import {
   ModalForgotPasswordAction,
   ModalLoginAction,
 } from '@/lib/features/userSlice';
+import { IoMdArrowRoundBack } from "react-icons/io";
 import InputFields from '../../../components/InputFields';
 import useFormikForgotPassword from '@/hooks/formiks/useFormikForgotPassword';
 
-const FormForgotPassword = ({ dispatch, role ,setLogin, setForgotPassword }: any) => {
+const FormForgotPassword = ({ dispatch}: any) => {
   const formik = useFormikForgotPassword();
   const handleClick = () => {
-    if (role === 'customer') {
       dispatch(ModalForgotPasswordAction(false));
       dispatch(ModalLoginAction(true));
-    }
-    if(role === "promoter"){
-      setLogin(true)
-      setForgotPassword(false)
-    }
   };
   return (
     <section>
@@ -25,20 +20,18 @@ const FormForgotPassword = ({ dispatch, role ,setLogin, setForgotPassword }: any
           className="text-white text-2xl mr-4"
           onClick={() => handleClick()}
         >
-          {'<'}
+          <IoMdArrowRoundBack />
         </button>
 
         <h1 className=" text-4xl py-3 text-white font-bold font-mono">
           Forgot Password
         </h1>
-        {role === 'customer' && (
           <button
             className="text-white text-2xl"
             onClick={() => dispatch(ModalForgotPasswordAction(false))}
           >
             x{' '}
           </button>
-        )}
       </div>
       <form onSubmit={formik.handleSubmit} className="text-center p-12">
         <InputFields

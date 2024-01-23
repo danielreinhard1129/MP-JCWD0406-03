@@ -5,7 +5,7 @@ const InputFields = ({ label, name, formik, ...props }: any) => {
     <div className="mb-4">
       <label
         htmlFor={props.id || props.name}
-        className="block mb-2 text-sm font-medium text-start  text-gray-900 dark:text-white"
+        className="block mb-2 md:text-sm text-xs font-medium text-start  text-gray-900 dark:text-white"
       >
         {label}
       </label>

@@ -14,13 +14,14 @@ import { axiosInstance } from '@/helper/axios';
 import { useAppSelector } from '@/lib/hooks';
 import toast from 'react-hot-toast';
 
-const FormRegister = ({ dispatch, title, role, setLogin }: any) => {
-  const [next, setNext] = useState('input1');
-  const formikRegister = useFormikRegister(setNext, role);
+const FormRegister = ({ dispatch, role, setLogin }: any) => {
+  const [next, setNext] = useState(1);
   const [isUseReferralCode, setIsUseReferralCode] = useState(false);
   const formikSetImage = useFormikSetImage(setNext);
   const formikReferralCode = useFormikReferralCode(setIsUseReferralCode);
   const userId = useAppSelector((state) => state.user.dataUser?.id);
+  const [navigateRole, setNavigateRole] = useState('customer');
+  const formikRegister = useFormikRegister(setNext, navigateRole);
 
   const handleCodeReferralSubmit = async () => {
     try {
@@ -32,47 +33,72 @@ const FormRegister = ({ dispatch, title, role, setLogin }: any) => {
             userId,
           },
         );
-        toast.success("Congratulations you earned 10% coupon discont")
+        toast.success('Congratulations you earned 10% coupon discont');
       }
-      setNext('input4');
+      setNext(4);
     } catch (error) {
       console.log(error);
-      
     }
   };
   return (
     <section>
-      <div className="bg-[#4f4cee] flex justify-between px-6 mb-4">
-        <h1 className=" text-4xl py-3 text-white font-bold font-mono">
-          {title}
-        </h1>
-        {next === 'input1' && role === 'customer' && (
-          <button
-            className="text-white text-2xl"
-            onClick={() => dispatch(ModalRegisterAction(false))}
-          >
-            x
-          </button>
-        )}
-      </div>
-      {next !== 'input1' && <StepRegister next={next} />}
-      {next === 'input1' && (
+      {next === 1 && (
+        <div>
+          <div className="bg-[#4f4cee] flex justify-between px-6 mb-4">
+            <h1 className="md:text-4xl py-3 text-white font-bold font-mono">
+              Join To Karcis
+            </h1>
+            <div>
+              <button
+                className="text-white text-2xl"
+                onClick={() => dispatch(ModalRegisterAction(false))}
+              >
+                x
+              </button>
+            </div>
+          </div>
+          <div className="flex w-full">
+            <p
+              className={`border-b-4 w-[50%] text-center ${
+                navigateRole === 'customer'
+                  ? 'text-blue-500 border-blue-600'
+                  : 'text-gray-400 '
+              } font-bold   cursor-pointer`}
+              onClick={() => setNavigateRole('customer')}
+            >
+              Customer
+            </p>
+            <p
+              className={`border-b-4 w-[50%] text-center  ${
+                navigateRole === 'promoter'
+                  ? 'text-blue-500 border-blue-600'
+                  : 'text-gray-400'
+              } font-bold  cursor-pointer`}
+              onClick={() => setNavigateRole('promoter')}
+            >
+              Promoter
+            </p>
+          </div>
+        </div>
+      )}
+      {next !== 1 && <StepRegister next={next} />}
+      {next === 1 && (
         <form onSubmit={formikRegister.handleSubmit}>
           <InputRegister
             dispatch={dispatch}
             formik={formikRegister}
-            role={role}
+            role={navigateRole}
             setLogin={setLogin}
           />
         </form>
       )}
 
-      {next === 'input2' && (
+      {next === 2 && (
         <form onSubmit={formikSetImage.handleSubmit}>
           <SetImage formik={formikSetImage} />
         </form>
       )}
-      {next === 'input3' && (
+      {next === 3 && (
         <div className="mx-10">
           <form onSubmit={formikReferralCode.handleSubmit} className="p-10">
             <InputReferralCode
@@ -88,9 +114,7 @@ const FormRegister = ({ dispatch, title, role, setLogin }: any) => {
           </button>
         </div>
       )}
-      {next === 'input4' && (
-        <CardSuccessRegister dispatch={dispatch} role={role} />
-      )}
+      {next === 4 && <CardSuccessRegister dispatch={dispatch} role={role} />}
     </section>
   );
 };
