@@ -1,11 +1,13 @@
-import AdminPage from './components/AdminPage';
+import DashboardCard from './components/DashboardCard';
+import SideBar from './components/SideBar';
 
-const Promoters = () => {
+const DashboardPage = () => {
   return (
-    <section >
-      <AdminPage />
-    </section>
+    <div className='flex'>
+      <SideBar />
+      <DashboardCard />
+    </div>
   );
 };
 
-export default Promoters;
+export default DashboardPage;

@@ -1,21 +1,23 @@
+'use client';
 import { Poppins } from 'next/font/google';
 import { useAppSelector } from '@/lib/hooks';
 import React from 'react';
 import Statisticts from './Statisticts';
+import { PromoterGuard } from '@/helper/HOC/AdminGuard';
 
 const roboto = Poppins({
   weight: '400',
   subsets: ['latin'],
 });
 
-const Dasboard = () => {
+const DashboardCard = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
   return (
     <div className={`${roboto.className} w-full`}>
       <h1 className="text-4xl font-bold m-4 mb-10">
         Hello, {selector.firstName}
       </h1>
-      <p className='text-center text-4xl font-bold'>My Dassboard</p>
+      <p className="text-center text-4xl font-bold">My Dassboard</p>
       <ul className="flex m-4 justify-center">
         <li className="bg-blue-500 w-56 text-center mr-4 h-32 rounded-lg">
           <h1 className="text-white mt-4 text-xl font-bold border-b-2">
@@ -34,11 +36,11 @@ const Dasboard = () => {
           <p className="font-bold text-2xl  mt-2">$500</p>
         </li>
       </ul>
-      <div className='border-y-2 border-black'>
+      <div className="border-y-2 border-black">
         <Statisticts />
       </div>
     </div>
   );
 };
 
-export default Dasboard;
+export default PromoterGuard(DashboardCard);

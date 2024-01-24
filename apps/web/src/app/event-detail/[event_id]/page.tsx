@@ -5,16 +5,12 @@ import Banner from '@/app/event-detail/[event_id]/components/Banner';
 import axios from 'axios';
 import { baseUrl } from '@/utils/config';
 import { useParams, useRouter } from 'next/navigation';
-import { GrLocation } from 'react-icons/gr';
-import { SlCalender } from 'react-icons/sl';
-import { IoPeopleSharp, IoTimer } from 'react-icons/io5';
-import { IoIosWarning } from 'react-icons/io';
 import EventInformation from './components/EventInformation';
 import Location from './components/Location';
 
 const EventPage = () => {
   const params = useParams();
-  console.log({ params }); //ini biar nanti keluar di console.lognya param:{}
+  console.log({ params }); 
   const [event, setEvent] = useState({
     id: '',
     tittle: '',
