@@ -1,12 +1,16 @@
 'use client';
 
 import { PromoterGuard } from '@/helper/HOC/AdminGuard';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 import { baseUrl } from '@/utils/config';
 import axios, { AxiosError } from 'axios';
 import { TextInput } from 'flowbite-react';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const EventForm = () => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       tittle: '',
@@ -49,16 +53,21 @@ const EventForm = () => {
       }
     },
   });
-  const handleClick = () => {};
   return (
-    <div>
-      <div className="max-w-4xl mx-auto w-screen flex flex-col items-center justify-center">
-        <header className="my-6">
+    <>
+      <div className="flex w-full items-center sticky top-0 z-50 bg-white  mx-20">
+        <Link href={'/promoters/manage-event'}>
+          <p className="flex text-3xl items-center ml-10 mr-10">
+            <IoMdArrowRoundBack /> <span className="pl-2">Back</span>
+          </p>
+        </Link>
+        <header className="my-6 ml-16">
           <h1 className="text-center font-extrabold text-sky-700 tracking-tight text-6xl">
             Create Event
           </h1>
         </header>
-
+      </div>
+      <div className="max-w-4xl mx-auto w-screen flex flex-col items-center justify-center">
         <form
           onSubmit={formik.handleSubmit}
           className="w-full grid gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 lg:px-8"
@@ -218,7 +227,7 @@ const EventForm = () => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

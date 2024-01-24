@@ -1,7 +1,9 @@
+'use client';
 import { Poppins } from 'next/font/google';
 import { CiSearch } from 'react-icons/ci';
 import React from 'react';
 import Link from 'next/link';
+import { PromoterGuard } from '@/helper/HOC/AdminGuard';
 
 const poppins = Poppins({
   weight: '400',
@@ -25,8 +27,8 @@ const ManageEvent = () => {
             <CiSearch />
           </button>
         </form>
-        <Link href={'/promoters/create-event'}>
-          <button className="bg-blue-500 text-white px-2 rounded">
+        <Link href={'/promoters/manage-event/create-event'}>
+          <button className="bg-blue-500 text-white px-2 py-4 rounded">
             Create Event
           </button>
         </Link>
@@ -35,4 +37,4 @@ const ManageEvent = () => {
   );
 };
 
-export default ManageEvent;
+export default PromoterGuard(ManageEvent);

@@ -34,7 +34,8 @@ const useFormikLogin = () => {
         localStorage.setItem('token', JSON.stringify(data.token));
 
         toast.success('Success Login');
-        if (data.data.role.name === 'promoter') {
+        if (data.data.role?.name === 'promoter') {
+          alert("success")
           redirect('/promoters');
         }
 
