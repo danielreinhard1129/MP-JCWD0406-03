@@ -4,6 +4,7 @@ import { CiSearch } from 'react-icons/ci';
 import React from 'react';
 import Link from 'next/link';
 import { PromoterGuard } from '@/helper/HOC/AdminGuard';
+import TableEvent from './TableEvent';
 
 const poppins = Poppins({
   weight: '400',
@@ -33,6 +34,7 @@ const ManageEvent = () => {
           </button>
         </Link>
       </div>
+      <TableEvent/>
     </section>
   );
 };
