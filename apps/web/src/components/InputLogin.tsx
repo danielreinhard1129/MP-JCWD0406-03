@@ -13,7 +13,7 @@ const InputLogin = ({ formik }: any) => {
       />
       <InputFields
         label="Password"
-        name="assword"
+        name="password"
         id="password"
         type="password"
         formik={formik}
