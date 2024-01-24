@@ -26,7 +26,6 @@ const DashboardCard = () => {
       </div>
     );
   }
-
   return (
     <div className={`${roboto.className} w-full`}>
       <h1 className="text-4xl font-bold m-4 mb-10">
