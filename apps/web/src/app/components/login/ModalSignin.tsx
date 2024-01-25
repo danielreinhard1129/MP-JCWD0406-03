@@ -14,7 +14,7 @@ const ModalSignin = () => {
     <Transition.Root show={selectorModal} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={ModalLoginAction}
       >
@@ -46,7 +46,7 @@ const ModalSignin = () => {
                   <div className="sm:flex sm:items-start">
                     <div className="w-full">
                       <div>
-                        <FormLogin dispatch={dispatch} role={'customer'} />
+                        <FormLogin dispatch={dispatch} role={'customer'} title={"Login Costumer"}/>
                       </div>
                     </div>
                   </div>

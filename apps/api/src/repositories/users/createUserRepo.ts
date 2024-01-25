@@ -1,13 +1,14 @@
 import prisma from '@/prisma';
-import { IUser } from '@/typeapi/user.type';
+import { IUser } from '@/util/user.type';
 
 export const createUser = async (body: IUser) => {
   try {
     const {
       firstName,
       lastName,
+      nameOrganization,
       phoneNumber,
-      codeReferral,
+      referralCode,
       email,
       password,
       role,
@@ -16,13 +17,14 @@ export const createUser = async (body: IUser) => {
       data: {
         firstName,
         lastName,
+        nameOrganization,
         email,
-        codeReferral,
+        referralCode,
         phoneNumber,
         password,
         role: {
           create: {
-            name: role,       
+            name: role,
           },
         },
       },

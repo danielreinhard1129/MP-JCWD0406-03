@@ -1,11 +1,23 @@
 import { hashPaswword } from '@/helper/bcrypt';
 import { excludeFields } from '@/helper/excludeFields';
-import { createToken } from '@/helper/jwt';
+import { createRefreshToken, createToken } from '@/helper/jwt';
 import { nanoid } from '@/helper/nanoid';
 import { createUser } from '@/repositories/users/createUserRepo';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { findUserByPhoneNumber } from '@/repositories/users/findUserByPhoneNumber';
-import { IUser } from '@/typeapi/user.type';
+import { IUser } from '@/util/user.type';
+
+interface PayloadToken {
+  email: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: PayloadToken;
+    }
+  }
+}
 
 export const registerAction = async (body: IUser) => {
   try {
@@ -27,11 +39,14 @@ export const registerAction = async (body: IUser) => {
     }
 
     body.password = await hashPaswword(body.password);
-    body.codeReferral = nanoid();
+    if (body.role !== 'promoter') {
+      body.referralCode = nanoid();
+    }
 
     const user = await createUser(body);
 
-    const token = createToken({ id: user.id });
+    const token = createToken({ email: body.email });
+    const refreshToken = createRefreshToken({ email: body.email })
     const data = excludeFields(user, ['password']);
 
     return {
@@ -39,6 +54,7 @@ export const registerAction = async (body: IUser) => {
       message: 'Success Register',
       data,
       token,
+      refreshToken
     };
   } catch (error) {
     throw error;

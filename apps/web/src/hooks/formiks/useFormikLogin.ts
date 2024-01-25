@@ -1,11 +1,12 @@
 import { AuthAction, ModalLoginAction } from '@/lib/features/userSlice';
 import axios from 'axios';
 import { useFormik } from 'formik';
+import { redirect } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 import * as Yup from 'yup';
-const useFormikLogin = (role:string) => {
+const useFormikLogin = () => {
   const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     phoneNumberOrEmail: Yup.string().required(
@@ -20,7 +21,7 @@ const useFormikLogin = (role:string) => {
     },
     validationSchema,
 
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         const { data } = await axios.post(
           'http://localhost:8000/api/users/login',
@@ -30,17 +31,19 @@ const useFormikLogin = (role:string) => {
           },
         );
         console.log(data);
-        if(data.data.role.name !== role) throw new Error(toast.error(`Account has used as ${data.data.role.name}`))
         
-
-        dispatch(AuthAction({ data: data.data, token: data.token }));
-        localStorage.setItem(
-          'user',
-          JSON.stringify({ data: data.data, token: data.token }),
-        );
+        dispatch(AuthAction(data.data));
+        localStorage.setItem('token', JSON.stringify(data.token));
+        localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken));
 
         toast.success('Success Login');
+        if (data.data.role?.name === 'promoter') {
+          alert("success")
+          redirect('/promoters');
+        }
+
         dispatch(ModalLoginAction(false));
+        resetForm();
       } catch (error: any) {
         toast.error(error.response.data.message);
       }
