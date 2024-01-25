@@ -1,6 +1,6 @@
 import { comparePasswords } from '@/helper/bcrypt';
 import { excludeFields } from '@/helper/excludeFields';
-import { createToken } from '@/helper/jwt';
+import { createRefreshToken, createToken } from '@/helper/jwt';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { findUserByPhoneNumber } from '@/repositories/users/findUserByPhoneNumber';
 import { ILogin } from '@/util/user.type';
@@ -36,6 +36,7 @@ export const loginAction = async (body: ILogin) => {
     }
 
     const token = createToken({ email: user.email });
+    const refreshToken = createRefreshToken({ email: user.email })
     const data = excludeFields(user, ['password']);
 
     return {
@@ -43,6 +44,7 @@ export const loginAction = async (body: ILogin) => {
       message: 'Success Login',
       data,
       token,
+      refreshToken
     };
   } catch (error) {
     throw error;
