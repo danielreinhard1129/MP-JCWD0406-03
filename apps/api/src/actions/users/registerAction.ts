@@ -1,6 +1,6 @@
 import { hashPaswword } from '@/helper/bcrypt';
 import { excludeFields } from '@/helper/excludeFields';
-import { createToken } from '@/helper/jwt';
+import { createRefreshToken, createToken } from '@/helper/jwt';
 import { nanoid } from '@/helper/nanoid';
 import { createUser } from '@/repositories/users/createUserRepo';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
@@ -46,7 +46,7 @@ export const registerAction = async (body: IUser) => {
     const user = await createUser(body);
 
     const token = createToken({ email: body.email });
-
+    const refreshToken = createRefreshToken({ email: body.email })
     const data = excludeFields(user, ['password']);
 
     return {
@@ -54,6 +54,7 @@ export const registerAction = async (body: IUser) => {
       message: 'Success Register',
       data,
       token,
+      refreshToken
     };
   } catch (error) {
     throw error;
