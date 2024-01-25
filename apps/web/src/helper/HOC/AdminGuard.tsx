@@ -10,6 +10,11 @@ export const PromoterGuard = (Component: any) => {
             return redirect("/")
         }
     },[])
+    if(!role){
+      return(
+        <p>loading...</p>
+      )
+    }
     return <Component {...props}/>
   }
 }

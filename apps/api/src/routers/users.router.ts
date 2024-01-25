@@ -15,6 +15,7 @@ export class UserRouter {
     this.router.get('/keep-login',verifyToken, this.userController.keepLogin);
     this.router.get('/',verifyToken, this.userController.getAllUser);
     this.router.post('/login', this.userController.login);
+    this.router.post('/refreshToken',this.userController.refreshToken)
     this.router.post('/forgot-password', this.userController.forgotPassword);
     this.router.get('/verify', verifyToken, this.userController.isValid);
     this.router.post('/reset-password', verifyToken, this.userController.updatePasswordUser);
