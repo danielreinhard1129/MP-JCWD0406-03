@@ -13,7 +13,7 @@ interface Event {
   id: string;
   category: string;
   image: string;
-  tittle: string;
+  title: string;
   dateTime: string;
   location: string;
   price: number;
@@ -67,7 +67,7 @@ export default function EventPage() {
                 </Badge>
               </div>
               <h5 className=" line-clamp-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {data.tittle}
+                {data.title}
               </h5>
               <p className="flex line-clamp-3 font-normal text-gray-700 dark:text-gray-400">
                 <span className="mr-2">

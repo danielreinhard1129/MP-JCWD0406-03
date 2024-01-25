@@ -12,7 +12,7 @@ const EventInformation = ({data}:any)=> {
   console.log({ params });
   const [event, setEvent] = useState({
     id: '',
-    tittle: '',
+    title: '',
     price: '',
     dateTime: '',
     location: '',
