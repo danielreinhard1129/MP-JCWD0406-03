@@ -10,7 +10,10 @@ YupPassword(Yup);
 
 const useFormikRegister = (setNext: CallableFunction, role: string) => {
   const dispatch = useAppDispatch();
-  const nameOrganization = role === "promoter" ? Yup.string().required("This Field is Required") : Yup.string();
+  const nameOrganization =
+    role === 'promoter'
+      ? Yup.string().required('This Field is Required')
+      : Yup.string();
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('This Field is Required'),
     lastName: Yup.string().required('This Field is Required'),
@@ -54,19 +57,17 @@ const useFormikRegister = (setNext: CallableFunction, role: string) => {
             phoneNumber: values.phoneNumber,
             email: values.email,
             password: values.password,
-            role
+            role,
           },
         );
         dispatch(AuthAction(data.data));
-        localStorage.setItem(
-          'token',
-          JSON.stringify(data.token),
-        );
+        localStorage.setItem('token', JSON.stringify(data.token));
+        localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken));
 
-        if(data.data.role.name === "customer") {
-          setNext(2);
+        if (data.data.role.name === 'customer') {
+          return setNext(2);
         }
-        dispatch(ModalRegisterAction(false))
+        dispatch(ModalRegisterAction(false));
       } catch (error: any) {
         toast.error(error.response.data.message);
       }

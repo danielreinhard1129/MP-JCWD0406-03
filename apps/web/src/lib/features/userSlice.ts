@@ -57,7 +57,7 @@ export const userSlice = createSlice({
       state.dataUser.role.id = null;
       state.dataUser.id = null;
       state.dataUser.role.name = ''
-      localStorage.removeItem('token');
+      localStorage.clear();
     },
   },
 });
