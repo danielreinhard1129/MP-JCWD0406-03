@@ -38,13 +38,15 @@ const NavbarHome = () => {
     }
   };
   if(loading){
-    <div className="flex justify-center items-center h-screen w-full">
+    return(
+      <div className="flex justify-center items-center h-screen w-full">
         <Spinner
           
           aria-label="Extra large spinner example"
           size="xl"
         />
-      </div>
+      </div> 
+    )
   }
   return (
     <section className="sticky top-0 z-40">
