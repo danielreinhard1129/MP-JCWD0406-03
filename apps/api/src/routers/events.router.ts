@@ -1,4 +1,5 @@
 import { EventController } from '@/controllers/events.controller';
+import { verifyToken } from '@/middlewares/jwtVerifyToken';
 import { Router } from 'express';
 
 export class EventRouter {
@@ -11,13 +12,14 @@ export class EventRouter {
   }
   private initializeRoutes(): void {
     this.router.get('/', this.eventController.getEvents);
-    this.router.post('/', this.eventController.createEvent);
+    this.router.post('/', verifyToken, this.eventController.createEvent);
     this.router.get('/:id', this.eventController.getEventById);
     this.router.get(
       '/filter/category',
       this.eventController.getEventsByCategory,
     );
     this.router.get('/filter/date', this.eventController.getEventsByDate);
+    this.router.patch('/:id', verifyToken, this.eventController.updateEvent);
   }
   getRouter(): Router {
     return this.router;

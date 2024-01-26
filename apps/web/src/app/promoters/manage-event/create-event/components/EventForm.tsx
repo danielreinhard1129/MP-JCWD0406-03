@@ -13,7 +13,7 @@ const EventForm = () => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      tittle: '',
+      title: '',
       category: '',
       description: '',
       location: '',
@@ -25,7 +25,7 @@ const EventForm = () => {
     onSubmit: async (values) => {
       try {
         const {
-          tittle,
+          title,
           category,
           description,
           location,
@@ -35,7 +35,7 @@ const EventForm = () => {
           banner,
         } = values;
         await axios.post(`${baseUrl}/events/`, {
-          tittle: values.tittle,
+          title: values.title,
           category: values.category,
           location: values.location,
           description: values.description,
@@ -82,11 +82,11 @@ const EventForm = () => {
             <div className="flex-1">
               <TextInput
                 placeholder="Event Name"
-                name="tittle"
+                name="title"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.tittle}
+                value={formik.values.title}
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ const EventForm = () => {
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Event Name"
+                placeholder="Category"
                 name="category"
                 type="text"
                 onChange={formik.handleChange}
@@ -113,11 +113,11 @@ const EventForm = () => {
               htmlFor="category"
               className="w-32 text-right pr-4 font-bold text-gray-700"
             >
-              location
+              Location
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Event Name"
+                placeholder="Location"
                 name="location"
                 type="text"
                 onChange={formik.handleChange}
@@ -172,7 +172,7 @@ const EventForm = () => {
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Event Name"
+                placeholder="Date"
                 name="dateTime"
                 type="date"
                 onChange={formik.handleChange}
@@ -208,7 +208,7 @@ const EventForm = () => {
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Banner"
+                placeholder="Event Name"
                 name="banner"
                 type="text"
                 onChange={formik.handleChange}

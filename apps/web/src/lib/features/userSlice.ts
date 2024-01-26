@@ -5,13 +5,13 @@ export interface UserState {
   firstName: string;
   lastName: string;
   email: String;
-  role: RoleSate ;
+  role: RoleSate;
 }
 
 interface RoleSate {
-    id: number | null;
-    name: string;
-    userId: number | null;
+  id: number | null;
+  name: string;
+  userId: number | null;
 }
 
 const dataUser: UserState = {
@@ -22,8 +22,8 @@ const dataUser: UserState = {
   role: {
     id: null,
     name: '',
-    userId: null
-  }
+    userId: null,
+  },
 };
 
 export const userSlice = createSlice({
@@ -56,7 +56,7 @@ export const userSlice = createSlice({
     LogoutAction: (state) => {
       state.dataUser.role.id = null;
       state.dataUser.id = null;
-      state.dataUser.role.name = ''
+      state.dataUser.role.name = '';
       localStorage.clear();
     },
   },
