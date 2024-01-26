@@ -30,11 +30,15 @@ const useFormikLogin = () => {
             password: values.password,
           },
         );
+        console.log(data);
+        
         dispatch(AuthAction(data.data));
         localStorage.setItem('token', JSON.stringify(data.token));
+        localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken));
 
         toast.success('Success Login');
-        if (data.data.role.name === 'promoter') {
+        if (data.data.role?.name === 'promoter') {
+          alert("success")
           redirect('/promoters');
         }
 

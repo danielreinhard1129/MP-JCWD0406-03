@@ -10,20 +10,8 @@ import Location from './components/Location';
 
 const EventPage = () => {
   const params = useParams();
-  console.log({ params }); 
-  const [event, setEvent] = useState({
-    id: '',
-    tittle: '',
-    price: '',
-    dateTime: '',
-    location: '',
-    description: '',
-    availableSeat: '',
-    createdAt: '',
-    updatedAt: '',
-    category: '',
-    banner: '',
-  });
+  console.log({ params });
+  const [event, setEvent] = useState({});
   console.log('data event', event);
 
   const router = useRouter();

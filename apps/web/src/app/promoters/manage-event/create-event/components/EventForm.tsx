@@ -1,15 +1,19 @@
 'use client';
 
 import { PromoterGuard } from '@/helper/HOC/AdminGuard';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 import { baseUrl } from '@/utils/config';
 import axios, { AxiosError } from 'axios';
 import { TextInput } from 'flowbite-react';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const EventForm = () => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      tittle: '',
+      title: '',
       category: '',
       description: '',
       location: '',
@@ -21,7 +25,7 @@ const EventForm = () => {
     onSubmit: async (values) => {
       try {
         const {
-          tittle,
+          title,
           category,
           description,
           location,
@@ -31,7 +35,7 @@ const EventForm = () => {
           banner,
         } = values;
         await axios.post(`${baseUrl}/events/`, {
-          tittle: values.tittle,
+          title: values.title,
           category: values.category,
           location: values.location,
           description: values.description,
@@ -49,16 +53,21 @@ const EventForm = () => {
       }
     },
   });
-  const handleClick = () => {};
   return (
-    <div>
-      <div className="max-w-4xl mx-auto w-screen flex flex-col items-center justify-center">
-        <header className="my-6">
+    <>
+      <div className="flex w-full items-center sticky top-0 z-50 bg-white  mx-20">
+        <Link href={'/promoters/manage-event'}>
+          <p className="flex text-3xl items-center ml-10 mr-10">
+            <IoMdArrowRoundBack /> <span className="pl-2">Back</span>
+          </p>
+        </Link>
+        <header className="my-6 ml-16">
           <h1 className="text-center font-extrabold text-sky-700 tracking-tight text-6xl">
             Create Event
           </h1>
         </header>
-
+      </div>
+      <div className="max-w-4xl mx-auto w-screen flex flex-col items-center justify-center">
         <form
           onSubmit={formik.handleSubmit}
           className="w-full grid gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 lg:px-8"
@@ -73,11 +82,11 @@ const EventForm = () => {
             <div className="flex-1">
               <TextInput
                 placeholder="Event Name"
-                name="tittle"
+                name="title"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.tittle}
+                value={formik.values.title}
               />
             </div>
           </div>
@@ -90,7 +99,7 @@ const EventForm = () => {
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Event Name"
+                placeholder="Category"
                 name="category"
                 type="text"
                 onChange={formik.handleChange}
@@ -104,11 +113,11 @@ const EventForm = () => {
               htmlFor="category"
               className="w-32 text-right pr-4 font-bold text-gray-700"
             >
-              location
+              Location
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Event Name"
+                placeholder="Location"
                 name="location"
                 type="text"
                 onChange={formik.handleChange}
@@ -163,7 +172,7 @@ const EventForm = () => {
             </label>
             <div className="flex-1">
               <TextInput
-                placeholder="Event Name"
+                placeholder="Date"
                 name="dateTime"
                 type="date"
                 onChange={formik.handleChange}
@@ -218,7 +227,7 @@ const EventForm = () => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

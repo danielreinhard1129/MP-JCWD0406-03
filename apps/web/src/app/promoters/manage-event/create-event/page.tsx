@@ -1,4 +1,3 @@
-import { IoArrowBack } from 'react-icons/io5';
 import React from 'react';
 import EventForm from './components/EventForm';
 

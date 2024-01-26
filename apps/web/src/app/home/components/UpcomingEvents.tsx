@@ -14,7 +14,7 @@ interface Event {
   id: string;
   category: string;
   image: string;
-  tittle: string;
+  title: string;
   dateTime: string;
   location: string;
   price: number;
@@ -43,11 +43,9 @@ const UpcomingEvents: React.FC = () => {
   };
 
   const handleSeeMoreClick = () => {
-    // Navigasi ke halaman lain saat tombol "See more" diklik
     router.push('/find-event');
   };
 
-  // Menampilkan hanya dua event pertama
   const displayedEvents = events.slice(0, 2);
 
   return (
@@ -73,11 +71,11 @@ const UpcomingEvents: React.FC = () => {
                   {event.category}
                 </Badge>
                 <Badge color="grey" size="sm" className="w-fit">
-                  {event.dateTime}
+                  {event.dateTime.slice(0, 10)}
                 </Badge>
               </div>
               <h5 className=" line-clamp-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {event.tittle}
+                {event.title}
               </h5>
               <p className="flex line-clamp-3 font-normal text-gray-700 dark:text-gray-400">
                 <span className="mr-2">

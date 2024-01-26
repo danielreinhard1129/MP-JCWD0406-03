@@ -3,7 +3,7 @@ import jwt, { TokenExpiredError } from 'jsonwebtoken';
 
 const secretKey = process.env.JWT_SECRET_KEY!;
 
-interface PayloadToken {
+export interface PayloadToken {
   email: string;
 }
 

@@ -19,7 +19,6 @@ const useFormikSetImage = (setNext: CallableFunction) => {
         if (values.image) {
           const formData = new FormData();
           formData.append('image', values.image);
-
           const { data } = await axios.post(
             'http://localhost:8000/api/users/upload-image',
             formData,

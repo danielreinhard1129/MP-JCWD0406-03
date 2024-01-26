@@ -3,6 +3,7 @@ import { allEventsAction } from '@/actions/events/getAllEventAction';
 import { getEventsByCategoryAction } from '@/actions/events/getEventByCategoryAction';
 import { getEventByIdAction } from '@/actions/events/getEventByIdAction';
 import { getEventsByDateAction } from '@/actions/events/getEventsByDateAction';
+import { updateEventAction } from '@/actions/events/updateEventAction';
 import { NextFunction, Request, Response } from 'express';
 
 export class EventController {
@@ -67,6 +68,17 @@ export class EventController {
       );
       res.status(result.status).send(result);
     } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateEvent(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = parseInt(req.params.id);
+      const result = await updateEventAction(id, req.body);
+      res.status(result.status).send(result);
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   }
