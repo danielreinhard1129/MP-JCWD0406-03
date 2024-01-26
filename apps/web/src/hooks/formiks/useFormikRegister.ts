@@ -8,7 +8,11 @@ import YupPassword from 'yup-password';
 
 YupPassword(Yup);
 
-const useFormikRegister = (setNext: CallableFunction, role: string, setLoading: CallableFunction) => {
+const useFormikRegister = (
+  setNext: CallableFunction,
+  role: string,
+  setLoading: CallableFunction,
+) => {
   const dispatch = useAppDispatch();
   const nameOrganization =
     role === 'promoter'
@@ -48,7 +52,7 @@ const useFormikRegister = (setNext: CallableFunction, role: string, setLoading: 
     validationSchema,
     onSubmit: async (values) => {
       try {
-        setLoading(true)
+        setLoading(true);
         const { data } = await axios.post(
           'http://localhost:8000/api/users/register',
           {
@@ -65,14 +69,13 @@ const useFormikRegister = (setNext: CallableFunction, role: string, setLoading: 
         localStorage.setItem('token', JSON.stringify(data.token));
         localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken));
 
+        setLoading(false);
         if (data.data.role.name === 'customer') {
           return setNext(2);
         }
         dispatch(ModalRegisterAction(false));
       } catch (error: any) {
         toast.error(error.response.data.message);
-      }finally{
-        setLoading(false)
       }
     },
   });
