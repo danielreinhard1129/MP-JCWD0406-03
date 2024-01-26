@@ -13,7 +13,7 @@ interface Event {
   id: string;
   category: string;
   image: string;
-  tittle: string;
+  title: string;
   dateTime: string;
   location: string;
   price: number;
@@ -23,6 +23,8 @@ interface Event {
 export default function EventPage() {
   const router = useRouter();
   const params = useParams();
+  console.log(params);
+
   const [category, setCategory] = useState<Event[]>([]);
   const getEvents = async () => {
     try {
@@ -63,11 +65,11 @@ export default function EventPage() {
                   {data.category}
                 </Badge>
                 <Badge color="grey" size="sm" className="w-fit">
-                  {data.dateTime}
+                  {data.dateTime.slice(0, 10)}
                 </Badge>
               </div>
               <h5 className=" line-clamp-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {data.tittle}
+                {data.title}
               </h5>
               <p className="flex line-clamp-3 font-normal text-gray-700 dark:text-gray-400">
                 <span className="mr-2">

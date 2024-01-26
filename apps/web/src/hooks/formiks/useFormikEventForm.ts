@@ -11,46 +11,38 @@ const useFormikEventForm = () => {
     price: Yup.number().required('Price cannot be empty'),
     dateTime: Yup.date().required('Date and Time cannot be empty'),
     availableSeat: Yup.number().required('Available Seats cannot be empty'),
-    ticketType: Yup.string().required('Ticket Type cannot be empty'),
   });
 
   const formik = useFormik({
     initialValues: {
-      tittle: '',
+      title: '',
       category: '',
       description: '',
       banner: '',
       price: '',
       dateTime: '',
       availableSeat: '',
-      ticketType: '',
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      console.log(values);
+      try {
+        const { title, category, description, price, dateTime, availableSeat } =
+          values;
+        const { data } = await axios.post(`${baseUrl}/events`, {
+          title,
+          category,
+          description,
+          price,
+          dateTime,
+          availableSeat,
+        });
+
+        console.log(data);
+      } catch (error) {
+        console.error('Error creating event:', error);
+      }
     },
   });
-
-  // onSubmit: async (values) => {
-  //   try {
-  //     console.log(values.tittle);
-
-  //     const { tittle, category,description, price, dateTime, availableSeat, ticketType} = values
-  //     const {data} = await axios.post(`${baseUrl}/events/create`,{
-  //         tittle,
-  //         category,
-  //         description,
-  //         price,
-  //         dateTime,
-  //         availableSeat,
-  //         ticketType,
-  //       });
-
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.error('Error creating event:', error);
-  //   }
-  // },
 
   return formik;
 };

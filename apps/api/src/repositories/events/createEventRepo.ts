@@ -4,7 +4,7 @@ import { IEvent } from '@/typeapi/event.type';
 export const createEventRepo = async (data: IEvent) => {
   try {
     const {
-      tittle,
+      title,
       price,
       dateTime,
       location,
@@ -12,10 +12,11 @@ export const createEventRepo = async (data: IEvent) => {
       availableSeat,
       banner,
       category,
+      booked,
     } = data;
     const newEvent = await prisma.event.create({
       data: {
-        tittle,
+        title,
         price,
         dateTime,
         location,
@@ -23,6 +24,7 @@ export const createEventRepo = async (data: IEvent) => {
         availableSeat,
         banner,
         category,
+        booked,
       },
     });
 

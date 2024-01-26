@@ -1,29 +1,63 @@
 'use client';
 
-import { useDebounce } from '@/hooks/useDebounce';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { baseUrl } from '@/utils/config';
+import axios from 'axios';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Select from 'react-select';
 
-const SearchBar: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-
-  const debouncedSearchTerm = useDebounce(searchTerm, 800);
+const SearchBar = ({ event }: any) => {
+  const router = useRouter();
+  const params = useParams();
+  const [events, setEvents] = useState([]);
+  const getEvent = async () => {
+    try {
+      const reponse = await axios.get(`${baseUrl}/events/debounce`);
+      setEvents(reponse.data.data);
+      console.log('dataaa', reponse.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    console.log('Searching for:', debouncedSearchTerm);
-  }, [debouncedSearchTerm]);
+    getEvent();
+  }, []);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const options = event.map((event: any) => {
+    return { value: event.id, label: event.title };
+  });
+
+  const handleChange = (selectedOption: any) => {
+    if (selectedOption && selectedOption.value) {
+      router.push(`/event-detail/${selectedOption.value}`);
+    }
   };
 
   return (
     <div className="mt-[-40px] mx-auto">
       <div className="px-4 sm:px-6 lg:px-16">
-        <input
-          type="text"
-          className="w-full p-4 text-xl rounded-md border-2 border-gray-200"
-          placeholder="Search for events, artists, or locations"
-          onChange={handleInputChange}
+        <Select
+          options={options}
+          isClearable={true}
+          isSearchable={true}
+          placeholder="Search for events"
+          onChange={handleChange}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              border: '2px solid #CBD5E0',
+              borderRadius: '0.375rem',
+            }),
+            input: (provided) => ({
+              ...provided,
+              fontSize: '1.25rem',
+            }),
+            placeholder: (provided) => ({
+              ...provided,
+              fontSize: '1.25rem',
+            }),
+          }}
         />
       </div>
     </div>
