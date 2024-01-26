@@ -11,25 +11,43 @@ import ModalSignin from '../app/components/login/ModalSignin';
 import ModalSignup from '../app/components/register/ModalSignup';
 import Link from 'next/link';
 import ModalForgotPassword from '@/app/components/forgotPassword/ModalForgotPassword';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useKeepLogin } from '@/hooks/auth/useKeepLogin';
-import { Navbar } from 'flowbite-react';
+import { Navbar, Spinner } from 'flowbite-react';
 
 const NavbarHome = () => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.user.dataUser);
-
+  const [loading,setLoading] = useState(false)
+  
   useEffect(() => {
-    handleSesion();
+    const token = JSON.parse(localStorage.getItem('token') as string);
+    if(token){
+      handleSesion();
+    }
   }, []);
   const handleSesion = async () => {
     try {
+      setLoading(true)
       const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
+  if(loading){
+    return(
+      <div className="flex justify-center items-center h-screen w-full">
+        <Spinner
+          
+          aria-label="Extra large spinner example"
+          size="xl"
+        />
+      </div> 
+    )
+  }
   return (
     <section className="sticky top-0 z-40">
       {selector.role.name !== 'promoter' && (

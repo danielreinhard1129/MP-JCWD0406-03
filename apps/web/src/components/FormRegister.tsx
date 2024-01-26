@@ -13,15 +13,29 @@ import StepRegister from '@/app/components/register/StepRegister';
 import { axiosInstance } from '@/helper/axios';
 import { useAppSelector } from '@/lib/hooks';
 import toast from 'react-hot-toast';
+import { Spinner } from 'flowbite-react';
 
 const FormRegister = ({ dispatch, role, setLogin }: any) => {
   const [next, setNext] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [isUseReferralCode, setIsUseReferralCode] = useState(false);
   const formikSetImage = useFormikSetImage(setNext);
   const formikReferralCode = useFormikReferralCode(setIsUseReferralCode);
   const userId = useAppSelector((state) => state.user.dataUser?.id);
   const [navigateRole, setNavigateRole] = useState('customer');
-  const formikRegister = useFormikRegister(setNext, navigateRole);
+  const formikRegister = useFormikRegister(setNext, navigateRole, setLoading);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center w-full">
+        <Spinner
+          
+          aria-label="Extra large spinner example"
+          size="xl"
+        />
+      </div>
+    );
+  }
 
   const handleCodeReferralSubmit = async () => {
     try {
