@@ -66,7 +66,7 @@ const AllEvent: React.FC = () => {
                   {event.category}
                 </Badge>
                 <Badge color="grey" size="sm" className="w-fit">
-                  {event.dateTime}
+                  {event.dateTime.slice(0, 10)}
                 </Badge>
               </div>
               <h5 className=" line-clamp-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

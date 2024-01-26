@@ -89,6 +89,7 @@ const BuyerDetail = () => {
           total: calculateTotal(),
           pointsUsed: 0,
         });
+        
         console.log(data.data);
         router.push(`/transaction/payment/${data.data.id}`);
         return;

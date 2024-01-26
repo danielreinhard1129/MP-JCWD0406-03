@@ -34,7 +34,7 @@ export class TransactionRouter {
       this.transactionController.getByIdTransaction,
     );
     this.router.patch(
-      '/id',
+      '/:id',
       verifyToken,
       this.transactionController.updateTransaction,
     );

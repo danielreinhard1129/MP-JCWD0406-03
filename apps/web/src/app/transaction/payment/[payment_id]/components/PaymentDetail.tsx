@@ -9,9 +9,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-const PaymentDetail = ({transaction}:any) => {
- 
-
+const PaymentDetail = ({ transaction }: any) => {
   // const [ticketQuantities, setTicketQuantities] = useState(0);
 
   // const calculateTotal = () => {
@@ -36,11 +34,6 @@ const PaymentDetail = ({transaction}:any) => {
         <div className="flex justify-between my-2 font-bold">
           <span>Total</span>
           <span>Rp {transaction?.total}</span>
-        </div>
-        <div className="flex justify-center">
-            <button className="px-6 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#1b64f1] hover:[#1b64f1]">
-              Continue to Payment
-            </button>
         </div>
       </div>
     </div>

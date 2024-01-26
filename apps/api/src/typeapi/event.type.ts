@@ -7,7 +7,7 @@ export interface IEvent {
   description: string;
   availableSeat: number;
   createdAt: Date;
-  updatedAt: Date | null;
+  updatedAt: Date;
   category: string;
   banner: string;
   booked: number;
