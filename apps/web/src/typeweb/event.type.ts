@@ -2,7 +2,7 @@ export interface IEvent {
   id: number;
   title: string;
   price: number;
-  dateTime: Date;
+  dateTime: string;
   location: string;
   description: string;
   availableSeat: number;
