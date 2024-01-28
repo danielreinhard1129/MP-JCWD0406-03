@@ -10,6 +10,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import ClaimModal from './ClaimModal';
 
 const BuyerDetail = () => {
   const params = useParams();
@@ -89,7 +90,7 @@ const BuyerDetail = () => {
           total: calculateTotal(),
           pointsUsed: 0,
         });
-        
+
         console.log(data.data);
         router.push(`/transaction/payment/${data.data.id}`);
         return;
@@ -98,6 +99,16 @@ const BuyerDetail = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
+
+  const handleOpenClaimModal = () => {
+    setIsClaimModalOpen(true);
+  };
+
+  const handleCloseClaimModal = () => {
+    setIsClaimModalOpen(false);
   };
 
   return (
@@ -133,10 +144,15 @@ const BuyerDetail = () => {
           </div>
           <span>Rp {event?.price}</span>
         </div>
+        <div>
+          <button onClick={handleOpenClaimModal}>Voucher</button>
+          {isClaimModalOpen && <ClaimModal onClose={handleCloseClaimModal} />}
+        </div>
         <div className="flex justify-between my-2 font-bold">
           <span>Total</span>
           <span>Rp {calculateTotal().toLocaleString()}</span>
         </div>
+
         <div className="flex justify-center">
           <button
             className="px-6 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#1b64f1] hover:[#1b64f1]"

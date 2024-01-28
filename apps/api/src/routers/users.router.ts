@@ -12,13 +12,17 @@ export class UserRouter {
   }
   private initializeRoutes(): void {
     this.router.post('/register', this.userController.register);
-    this.router.get('/keep-login',verifyToken, this.userController.keepLogin);
-    this.router.get('/',verifyToken, this.userController.getAllUser);
+    this.router.get('/keep-login', verifyToken, this.userController.keepLogin);
+    this.router.get('/', this.userController.getAllUser);
     this.router.post('/login', this.userController.login);
-    this.router.post('/refreshToken',this.userController.refreshToken)
+    this.router.post('/refreshToken', this.userController.refreshToken);
     this.router.post('/forgot-password', this.userController.forgotPassword);
     this.router.get('/verify', verifyToken, this.userController.isValid);
-    this.router.post('/reset-password', verifyToken, this.userController.updatePasswordUser);
+    this.router.post(
+      '/reset-password',
+      verifyToken,
+      this.userController.updatePasswordUser,
+    );
   }
   getRouter(): Router {
     return this.router;

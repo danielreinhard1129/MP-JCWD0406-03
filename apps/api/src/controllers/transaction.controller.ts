@@ -3,7 +3,9 @@ import { allTransactionAction } from '@/actions/transaction/getAllTransactionAct
 import { getByIdTransactionAction } from '@/actions/transaction/getByIdTransactionAction';
 import sendProofOfPaymentAction from '@/actions/transaction/sendProofOfPaymentAction';
 import { updateTransactionAction } from '@/actions/transaction/updateTransactionAction';
+import prisma from '@/prisma';
 import { NextFunction, Request, Response } from 'express';
+import scheduler from 'node-schedule'
 
 export class TransactionController {
   async getAllTransaction(req: Request, res: Response, next: NextFunction) {
@@ -20,6 +22,29 @@ export class TransactionController {
     try {
       const data = req.body;
       const addResult = await createTransactionAction(data);
+      
+      // const twoHours = new Date(Date.now() + 2 * 60 * 60 * 1000);
+      // scheduler.scheduleJob(twoHours, async () => {
+      //   const result = await prisma.transaction.findUnique({
+      //     where: { id: createTransaction.id },
+      //   });
+
+      //   if (result?.statusId === 1) {
+      //     await prisma.transaction.update({
+      //       where: { id: result.id },
+      //       data: { statusId: 4 }, // kadaluarsa
+      //     });
+
+      //     await prisma.event.update({
+      //       where: { id: eventId },
+      //       data: { booked: { decrement: qty } },
+      //     });
+      //   }
+
+      //   console.log('SCHEDULER 2H EXECUTED');
+      // });
+
+
       res.status(addResult.status).send(addResult);
     } catch (error) {
       console.log(error);
@@ -37,15 +62,15 @@ export class TransactionController {
     }
   }
 
-  async sendProofOfPayment(req: Request, res: Response, next: NextFunction){
-    try {
-      const{id} = req.params
-      const image = req.file?.filename
-      const result = await sendProofOfPaymentAction(parseInt(id,0),image as string)
-    } catch (error) {
+  // async sendProofOfPayment(req: Request, res: Response, next: NextFunction){
+  //   try {
+  //     const{id} = req.params
+  //     const image = req.file?.filename
+  //     const result = await sendProofOfPaymentAction(parseInt(id,0),image as string)
+  //   } catch (error) {
       
-    }
-  }
+  //   }
+  // }
   async updateTransaction(req: Request, res: Response, next: NextFunction) {
     try {
       const id = parseInt(req.params.id);

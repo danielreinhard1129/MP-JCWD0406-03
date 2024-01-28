@@ -10,4 +10,5 @@ export interface ITransaction {
   pointsUsed: number;
   createdAt: Date;
   updatedAt: Date;
+  userVoucherId: number;
 }

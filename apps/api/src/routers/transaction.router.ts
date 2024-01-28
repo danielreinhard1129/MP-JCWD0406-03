@@ -17,12 +17,12 @@ export class TransactionRouter {
       verifyToken,
       this.transactionController.createTransaction,
     );
-    this.router.post(
-      '/:id',
-      verifyToken,
-      upload.single('image'),
-      this.transactionController.sendProofOfPayment,
-    );
+    // this.router.post(
+    //   '/:id',
+    //   verifyToken,
+    //   upload.single('image'),
+    //   this.transactionController.sendProofOfPayment,
+    // );
     this.router.get(
       '/',
       verifyToken,
