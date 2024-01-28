@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,51 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id               Int              @id @default(autoincrement())
-  firstName        String
-  lastName         String
-  phoneNumber      String           @unique
-  email            String           @unique
-  password         String
-  role             Role?
-  nameOrganization String?
-  referralCode     String?          @unique
-  cuponDiscount    CouponDiscount?
-  points   ReferralPoints? 
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
-  isDeleted        Boolean          @default(false)
-  Transaction      Transaction[]
-}
-
-model Role {
-  id     Int    @id @default(autoincrement())
-  name   String
-  userId Int    @unique
-  user   User   @relation(fields: [userId], references: [id])
-}
-
-model CouponDiscount {
-  id                 Int      @id @default(autoincrement())
-  userId             Int      @unique
-  user               User     @relation(fields: [userId], references: [id])
-  couponCode         String
-  isUsed             Boolean  @default(false)
-  discountPersentase Int
-  dateReceived       DateTime @default(now())
-  expiresOn          DateTime
-}
-
-model ReferralPoints {
-  id             Int      @id @default(autoincrement())
-  userId Int      @unique
-  user User @relation(fields: [userId],references: [id])
-  pointEarned    Int  @default(0)
-  dateEarned     DateTime @default(now())
-  expiresOn      DateTime
-}
-
 model Sample {
   id        Int      @id @default(autoincrement())
   name      String
@@ -62,12 +14,12 @@ model Sample {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("samples") // if you want to use snake_case format
+  @@map("samples")
 }
 
 model Event {
   id            Int           @id @default(autoincrement())
-  userId Int @unique
+  userId        Int
   title         String
   price         Float
   dateTime      DateTime
@@ -79,14 +31,47 @@ model Event {
   category      String
   banner        String
   booked        Int           @default(0)
-  Transaction   Transaction[]
+  transaction   transaction[]
 
   @@map("events")
 }
 
-model Transaction {
+model coupondiscount {
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @unique(map: "CouponDiscount_userId_key")
+  couponCode         String
+  isUsed             Boolean  @default(false)
+  discountPersentase Int
+  dateReceived       DateTime @default(now())
+  expiresOn          DateTime
+  user               user     @relation(fields: [userId], references: [id], map: "CouponDiscount_userId_fkey")
+}
+
+model referralpoints {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @unique(map: "ReferralPoints_userId_key")
+  pointEarned Int      @default(0)
+  dateEarned  DateTime @default(now())
+  expiresOn   DateTime
+  user        user     @relation(fields: [userId], references: [id], map: "ReferralPoints_userId_fkey")
+}
+
+model role {
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int    @unique(map: "Role_userId_key")
+  user   user   @relation(fields: [userId], references: [id], map: "Role_userId_fkey")
+}
+
+model status {
+  id          Int           @id @default(autoincrement())
+  title       String
+  transaction transaction[]
+}
+
+model transaction {
   id           Int      @id @default(autoincrement())
-  uuid         String   @unique @default(uuid())
+  uuid         String   @unique(map: "Transaction_uuid_key")
   userId       Int
   eventId      Int
   statusId     Int      @default(1)
@@ -95,15 +80,30 @@ model Transaction {
   total        Int
   pointsUsed   Int
   createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  updatedAt    DateTime
+  events       Event    @relation(fields: [eventId], references: [id], map: "Transaction_eventId_fkey")
+  status       status   @relation(fields: [statusId], references: [id], map: "Transaction_statusId_fkey")
+  user         user     @relation(fields: [userId], references: [id], map: "Transaction_userId_fkey")
 
-  user   User   @relation(fields: [userId], references: [id])
-  event  Event  @relation(fields: [eventId], references: [id])
-  status Status @relation(fields: [statusId], references: [id])
+  @@index([eventId], map: "Transaction_eventId_fkey")
+  @@index([statusId], map: "Transaction_statusId_fkey")
+  @@index([userId], map: "Transaction_userId_fkey")
 }
 
-model Status {
-  id          Int           @id @default(autoincrement())
-  title       String
-  Transaction Transaction[]
+model user {
+  id               Int             @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  phoneNumber      String          @unique(map: "User_phoneNumber_key")
+  email            String          @unique(map: "User_email_key")
+  password         String
+  nameOrganization String?
+  referralCode     String?         @unique(map: "User_referralCode_key")
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime
+  isDeleted        Boolean         @default(false)
+  coupondiscount   coupondiscount?
+  referralpoints   referralpoints?
+  role             role?
+  transaction      transaction[]
 }
