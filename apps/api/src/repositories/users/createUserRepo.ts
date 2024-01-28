@@ -1,5 +1,5 @@
 import prisma from '@/prisma';
-import { IUser } from '@/util/user.type';
+import { IUser } from '@/typeapi/user.type';
 
 export const createUser = async (body: IUser) => {
   try {

@@ -8,6 +8,7 @@ import { TextInput } from 'flowbite-react';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { axiosInstance } from '@/helper/axios';
 
 const EventForm = () => {
   const router = useRouter();
@@ -34,7 +35,7 @@ const EventForm = () => {
           availableSeat,
           banner,
         } = values;
-        await axios.post(`${baseUrl}/events/`, {
+        await axiosInstance.post(`${baseUrl}/events/`, {
           title: values.title,
           category: values.category,
           location: values.location,

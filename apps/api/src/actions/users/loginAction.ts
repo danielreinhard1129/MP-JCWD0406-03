@@ -3,7 +3,8 @@ import { excludeFields } from '@/helper/excludeFields';
 import { createRefreshToken, createToken } from '@/helper/jwt';
 import { findUserByEmail } from '@/repositories/users/findUserByEmail';
 import { findUserByPhoneNumber } from '@/repositories/users/findUserByPhoneNumber';
-import { ILogin } from '@/util/user.type';
+import { ILogin } from '@/typeapi/user.type';
+
 
 export const loginAction = async (body: ILogin) => {
   try {

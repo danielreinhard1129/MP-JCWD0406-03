@@ -39,7 +39,7 @@ const TableEvent = () => {
                 key={value.id}
               >
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {value?.tittle}
+                  {value?.title}
                 </Table.Cell>
                 <Table.Cell>{value?.dateTime.slice(0,10)}</Table.Cell>
                 <Table.Cell>{value?.category}</Table.Cell>
