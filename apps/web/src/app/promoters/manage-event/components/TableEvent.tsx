@@ -4,18 +4,16 @@ import { Spinner, Table } from 'flowbite-react';
 import { axiosInstance } from '@/helper/axios';
 import { baseUrl } from '@/utils/config';
 import { IEvent } from '@/typeweb/event.type';
-import useGetAllEvents from '@/hooks/events/useGetAllEvents';
+import useGetAllEvents from '@/hooks/events/useGetEventsByUserId';
+import { useAppSelector } from '@/lib/hooks';
 
 const TableEvent = () => {
-  const { data, error, loading } = useGetAllEvents();
+  const selector = useAppSelector((state) => state.user.dataUser)
+  const { data, error, loading } = useGetAllEvents(selector.id || 0);
   if (loading) {
     return (
       <div className="flex justify-center w-full">
-        <Spinner
-          
-          aria-label="Extra large spinner example"
-          size="xl"
-        />
+        <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
   }
@@ -41,7 +39,7 @@ const TableEvent = () => {
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {value?.title}
                 </Table.Cell>
-                <Table.Cell>{value?.dateTime.slice(0,10)}</Table.Cell>
+                <Table.Cell>{value?.dateTime.slice(0, 10)}</Table.Cell>
                 <Table.Cell>{value?.category}</Table.Cell>
                 <Table.Cell>{value?.price}</Table.Cell>
                 <Table.Cell>

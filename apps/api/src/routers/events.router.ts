@@ -13,6 +13,7 @@ export class EventRouter {
   private initializeRoutes(): void {
     this.router.get('/', this.eventController.getEvents);
     this.router.post('/', verifyToken, this.eventController.createEvent);
+    this.router.get('/promoter/:userId', verifyToken, this.eventController.getEventByUserId);
     this.router.get('/:id', this.eventController.getEventById);
     this.router.get(
       '/filter/category',

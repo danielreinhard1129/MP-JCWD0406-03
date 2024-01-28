@@ -1,17 +1,20 @@
 import prisma from '@/prisma';
 
-const getEventByUserIdRepo = async (userId: number) => {
+const getTransactionByUserIdRepo = async (userId: number) => {
   try {
     const data = await prisma.event.findMany({
       where: {
         userId,
       },
-      include: { Transaction: true },
+      include: {
+        Transaction: { include: { user: true ,status:true} },
+      },
     });
+
     return data;
   } catch (error) {
     throw error;
   }
 };
 
-export default getEventByUserIdRepo;
+export default getTransactionByUserIdRepo;

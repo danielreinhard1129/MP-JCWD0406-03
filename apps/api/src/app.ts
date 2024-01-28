@@ -61,6 +61,7 @@ export default class App {
     const rewardRouter = new RewardRouter();
     const transactionRouter = new TransactionRouter();
 
+
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
     });

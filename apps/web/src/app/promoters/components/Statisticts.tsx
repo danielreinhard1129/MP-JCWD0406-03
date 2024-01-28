@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -7,7 +8,6 @@ import {
   Tooltip,
   Legend,
   CartesianGrid,
-  ResponsiveContainer,
 } from 'recharts';
 
 const data = [
@@ -28,29 +28,29 @@ const Statisticts = () => {
     <div className="grid grid-cols-2">
       <div className="z-10 p-2">
         <h1 className="font-bold text-xl p-2 mb-2"> {'->'} Data per Year</h1>
-          <LineChart width={700} height={300} data={data}>
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="events" stroke="#8884d8" />
-            <Line type="monotone" dataKey="registrations" stroke="#82ca9d" />
-            <Line type="monotone" dataKey="transactions" stroke="#ffc658" />
-          </LineChart>
+        <LineChart width={700} height={300} data={data}>
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <XAxis dataKey="tgl" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="events" stroke="#8884d8" />
+          <Line type="monotone" dataKey="registrations" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="transactions" stroke="#ffc658" />
+        </LineChart>
       </div>
-      <div >
+      <div>
         <h1 className="font-bold text-xl p-2 mb-2"> {'->'} Data per Month</h1>
-          <LineChart width={700} height={300} data={data}>
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="events" stroke="#8884d8" />
-            <Line type="monotone" dataKey="registrations" stroke="#82ca9d" />
-            <Line type="monotone" dataKey="transactions" stroke="#ffc658" />
-          </LineChart>
+        <LineChart width={700} height={300} data={data}>
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="events" stroke="#8884d8" />
+          <Line type="monotone" dataKey="registrations" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="transactions" stroke="#ffc658" />
+        </LineChart>
       </div>
       <div className="col-span-2 flex mt-20 justify-center border-t-2 mb-20">
         <div>

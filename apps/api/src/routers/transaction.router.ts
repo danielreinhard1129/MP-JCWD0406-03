@@ -17,6 +17,10 @@ export class TransactionRouter {
       verifyToken,
       this.transactionController.createTransaction,
     );
+    this.router.get(
+      '/promoter/:userId',
+      this.transactionController.getTransactionByUserId,
+    );
     this.router.post(
       '/:id',
       verifyToken,
