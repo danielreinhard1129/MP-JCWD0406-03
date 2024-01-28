@@ -1,4 +1,4 @@
-import { AuthAction } from '@/lib/features/userSlice';
+import { AuthAction, ModalRegisterAction } from '@/lib/features/userSlice';
 import { useAppDispatch } from '@/lib/hooks';
 import axios from 'axios';
 import { useFormik } from 'formik';
@@ -8,11 +8,20 @@ import YupPassword from 'yup-password';
 
 YupPassword(Yup);
 
-const useFormikRegister = (setNext: CallableFunction, role: string) => {
+const useFormikRegister = (
+  setNext: CallableFunction,
+  role: string,
+  setLoading: CallableFunction,
+) => {
   const dispatch = useAppDispatch();
+  const nameOrganization =
+    role === 'promoter'
+      ? Yup.string().required('This Field is Required')
+      : Yup.string();
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('This Field is Required'),
     lastName: Yup.string().required('This Field is Required'),
+    nameOrganization,
     email: Yup.string()
       .email('Please enter a valid email')
       .required('This Field is Required'),
@@ -34,6 +43,7 @@ const useFormikRegister = (setNext: CallableFunction, role: string) => {
     initialValues: {
       firstName: '',
       lastName: '',
+      nameOrganization: '',
       email: '',
       phoneNumber: '',
       password: '',
@@ -42,24 +52,28 @@ const useFormikRegister = (setNext: CallableFunction, role: string) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const { data } = await axios.post(
           'http://localhost:8000/api/users/register',
           {
             firstName: values.firstName,
             lastName: values.lastName,
+            nameOrganization: values.nameOrganization,
             phoneNumber: values.phoneNumber,
             email: values.email,
             password: values.password,
-            role
+            role,
           },
         );
         dispatch(AuthAction(data.data));
-        localStorage.setItem(
-          'token',
-          JSON.stringify(data.token),
-        );
+        localStorage.setItem('token', JSON.stringify(data.token));
+        localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken));
 
-        setNext('input2');
+        setLoading(false);
+        if (data.data.role.name === 'customer') {
+          return setNext(2);
+        }
+        dispatch(ModalRegisterAction(false));
       } catch (error: any) {
         toast.error(error.response.data.message);
       }

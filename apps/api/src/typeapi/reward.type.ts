@@ -9,8 +9,7 @@ export interface IDiscount {
 
 export interface IPointsReferral {
   id?: number;
-  referrerUserId: number;
-  referredUserId: number;
+  userId: number;
   pointEarned: number;
   dateEarned?: Date;
   expiresOn: Date;

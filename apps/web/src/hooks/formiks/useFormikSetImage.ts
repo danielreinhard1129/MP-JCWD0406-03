@@ -19,7 +19,6 @@ const useFormikSetImage = (setNext: CallableFunction) => {
         if (values.image) {
           const formData = new FormData();
           formData.append('image', values.image);
-          formData.append('userId', user.data?.id);
           const { data } = await axios.post(
             'http://localhost:8000/api/users/upload-image',
             formData,
@@ -35,7 +34,7 @@ const useFormikSetImage = (setNext: CallableFunction) => {
           localStorage.setItem('user', JSON.stringify(storage));
           toast.success('Success Add Image');
         }
-        setNext('input3');
+        setNext(3);
       } catch (error) {
         console.log(error);
       }
