@@ -6,6 +6,9 @@ export const findReferralCode = async (referralCode:string) => {
     const result = await prisma.user.findUnique({
         where: {
             referralCode
+        },
+        include:{
+          points:true
         }
     })
     return result

@@ -6,6 +6,7 @@ export const createEventRepo = async (data: IEvent) => {
     const {
       title,
       price,
+      userId,
       dateTime,
       location,
       description,
@@ -17,6 +18,7 @@ export const createEventRepo = async (data: IEvent) => {
     const newEvent = await prisma.event.create({
       data: {
         title,
+        userId,
         price,
         dateTime,
         location,

@@ -21,7 +21,7 @@ model User {
   nameOrganization String?
   referralCode     String?          @unique
   cuponDiscount    CouponDiscount?
-  referrerUser     ReferralPoints[] @relation("Referrer")
+  points   ReferralPoints? 
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
   isDeleted        Boolean          @default(false)
@@ -53,13 +53,11 @@ model CouponDiscount {
 
 model ReferralPoints {
   id             Int      @id @default(autoincrement())
-  referrerUserId Int
-  referredUserId Int      @unique
-  pointEarned    Int
-  isUsed         Boolean  @default(false)
+  userId Int      @unique
+  user User @relation(fields: [userId],references: [id])
+  pointEarned    Int  @default(0)
   dateEarned     DateTime @default(now())
   expiresOn      DateTime
-  referrerUser   User     @relation("Referrer", fields: [referrerUserId], references: [id])
 }
 
 model Sample {
@@ -73,7 +71,8 @@ model Sample {
 }
 
 model Event {
-  id            Int      @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
+  userId Int @unique
   title         String
   price         Float
   dateTime      DateTime

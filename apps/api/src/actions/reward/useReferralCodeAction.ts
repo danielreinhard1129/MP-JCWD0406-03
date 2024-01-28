@@ -5,6 +5,8 @@ import { IDiscount, IPointsReferral } from '@/typeapi/reward.type';
 import { addMonths, format } from 'date-fns';
 import { createPointsReferral } from '../../repositories/reward/createPointsReferral';
 import { findReferralPointsByReferredId } from '@/repositories/reward/findReferralPointsByReferredId';
+import { IUser } from '@/typeapi/user.type';
+import updatePointReferralRepo from '@/repositories/reward/updatePointReferralRepo';
 
 export const useReferralCodeAction = async (
   referralCode: string,
@@ -12,11 +14,11 @@ export const useReferralCodeAction = async (
 ) => {
   try {
     const userReferral = await findReferralCode(referralCode);
-    const isHasUse = await findReferralPointsByReferredId(userId)
     const user = await findUserById(userId);
     if (!userReferral) return { status: 404, message: 'referral is not found' };
+    if (userReferral.id === userId)
+      return { status: 404, message: 'referral is not found' };
     if (!user) return { status: 404, message: 'user is not found' };
-    if(isHasUse) return{status: 409, message: "code referal has used"}
     const currentDate = new Date();
 
     const futureDate = addMonths(currentDate, 3);
@@ -28,17 +30,22 @@ export const useReferralCodeAction = async (
       userId,
       discountPersentase: 10,
     };
-    const dataPoints: IPointsReferral = {
-      pointEarned: 10000,
-      referredUserId: userId,
-      referrerUserId: userReferral.id,
-      expiresOn: new Date(formattedDate),
-    };
+    const userPoint = await findReferralPointsByReferredId(userReferral.id);
+    if (!userPoint) {
+      const dataPoints: IPointsReferral = {
+        pointEarned: 10000,
+        userId: userReferral.id,
+        expiresOn: new Date(formattedDate),
+      };
+      await createPointsReferral(dataPoints);
+    } else {
+      userPoint.pointEarned = userPoint.pointEarned + 10000;
+      await updatePointReferralRepo(userPoint, userPoint.userId);
+    }
     await createDiscontRepo(dataDiscount);
-    await createPointsReferral(dataPoints);
     return {
       status: 200,
-      message: "Anda mendapatkan Discount 10%"
+      message: 'Anda mendapatkan Discount 10%',
     };
   } catch (error) {
     throw error;

@@ -25,17 +25,6 @@ const FormRegister = ({ dispatch, role, setLogin }: any) => {
   const [navigateRole, setNavigateRole] = useState('customer');
   const formikRegister = useFormikRegister(setNext, navigateRole, setLoading);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center w-full">
-        <Spinner
-          
-          aria-label="Extra large spinner example"
-          size="xl"
-        />
-      </div>
-    );
-  }
 
   const handleCodeReferralSubmit = async () => {
     try {
