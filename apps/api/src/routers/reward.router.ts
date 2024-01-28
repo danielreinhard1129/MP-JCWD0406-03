@@ -4,15 +4,16 @@ import { Router } from 'express';
 
 export class RewardRouter {
   private router: Router;
-  private rewardController : RewardController
+  private rewardController: RewardController;
 
   constructor() {
-    this.rewardController= new RewardController()
+    this.rewardController = new RewardController();
     this.router = Router();
     this.initializeRoutes();
   }
 
   private initializeRoutes(): void {
+    this.router.post('/create', this.rewardController.createDiscount);
     this.router.get("/:userId",verifyToken,this.rewardController.getReferralPointsByUserId)
     this.router.patch("/:userId",verifyToken,this.rewardController.updateReferralPoints)
     this.router.post('/check-referral-code',this.rewardController.checkReferralCode)

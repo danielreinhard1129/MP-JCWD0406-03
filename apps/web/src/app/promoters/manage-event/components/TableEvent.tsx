@@ -11,11 +11,7 @@ const TableEvent = () => {
   if (loading) {
     return (
       <div className="flex justify-center w-full">
-        <Spinner
-          
-          aria-label="Extra large spinner example"
-          size="xl"
-        />
+        <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
   }
@@ -23,7 +19,7 @@ const TableEvent = () => {
     <div className="overflow-x-auto">
       <Table>
         <Table.Head>
-          <Table.HeadCell>tittle</Table.HeadCell>
+          <Table.HeadCell>title</Table.HeadCell>
           <Table.HeadCell>Date</Table.HeadCell>
           <Table.HeadCell>Category</Table.HeadCell>
           <Table.HeadCell>Price</Table.HeadCell>
@@ -41,7 +37,7 @@ const TableEvent = () => {
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {value?.title}
                 </Table.Cell>
-                <Table.Cell>{value?.dateTime.slice(0,10)}</Table.Cell>
+                <Table.Cell>{value?.dateTime.slice(0, 10)}</Table.Cell>
                 <Table.Cell>{value?.category}</Table.Cell>
                 <Table.Cell>{value?.price}</Table.Cell>
                 <Table.Cell>

@@ -1,4 +1,5 @@
 import { createEventAction } from '@/actions/events/createEventAction';
+import filterByLocationCategoryTitleAction from '@/actions/events/filterByLocationCategoryTitleAction';
 import { allEventsAction } from '@/actions/events/getAllEventAction';
 import { getEventsByCategoryAction } from '@/actions/events/getEventByCategoryAction';
 import { getEventByIdAction } from '@/actions/events/getEventByIdAction';
@@ -79,6 +80,22 @@ export class EventController {
       res.status(result.status).send(result);
     } catch (error) {
       console.log(error);
+      next(error);
+    }
+  }
+
+  async debounceDiscovery(req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log('queryyyyyyy', req.query);
+
+      // const page = Number((req.query.page as string) || 1);
+      // const limit = Number((req.query.pageSize as string) || 4);
+
+      const result = await filterByLocationCategoryTitleAction();
+
+      res.status(result.status).send(result);
+      res.status(200).send('success');
+    } catch (error) {
       next(error);
     }
   }

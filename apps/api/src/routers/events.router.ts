@@ -20,6 +20,8 @@ export class EventRouter {
     );
     this.router.get('/filter/date', this.eventController.getEventsByDate);
     this.router.patch('/:id', verifyToken, this.eventController.updateEvent);
+    this.router.get('/filter/test', this.eventController.debounceDiscovery);
+    this.router.get('/filter/test', this.eventController.debounceDiscovery);
   }
   getRouter(): Router {
     return this.router;

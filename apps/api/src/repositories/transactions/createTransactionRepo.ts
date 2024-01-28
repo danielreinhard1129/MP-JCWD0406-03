@@ -3,7 +3,7 @@ import { ITransaction } from '@/typeapi/transaction.type';
 
 export const createTransactionRepo = async (data: ITransaction) => {
   try {
-    const { userId, eventId, qty, total, pointsUsed } = data;
+    const { userId, eventId, qty, total, pointsUsed,  } = data;
     const newTransaction = await prisma.transaction.create({
       data: {
         userId,

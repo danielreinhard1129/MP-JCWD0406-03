@@ -46,14 +46,12 @@ const UpcomingEvents: React.FC = () => {
     router.push('/find-event');
   };
 
-  const displayedEvents = events.slice(0, 2);
-
   return (
     <section>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-6">Upcoming Events</h2>
         <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  gap-4">
-          {events.map((event) => (
+          {events.slice(1, 5).map((event) => (
             <div
               key={event.id}
               className="bg-white rounded shadow p-4 transition-transform duration-300 transform hover:scale-105 cursor-pointer"

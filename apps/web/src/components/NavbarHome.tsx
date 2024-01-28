@@ -18,35 +18,31 @@ import { Navbar, Spinner } from 'flowbite-react';
 const NavbarHome = () => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.user.dataUser);
-  const [loading,setLoading] = useState(false)
-  
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token') as string);
-    if(token){
+    if (token) {
       handleSesion();
     }
   }, []);
   const handleSesion = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const { data } = await useKeepLogin();
       dispatch(AuthAction(data));
     } catch (error) {
       console.log(error);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
-  if(loading){
-    return(
+  if (loading) {
+    return (
       <div className="flex justify-center items-center h-screen w-full">
-        <Spinner
-          
-          aria-label="Extra large spinner example"
-          size="xl"
-        />
-      </div> 
-    )
+        <Spinner aria-label="Extra large spinner example" size="xl" />
+      </div>
+    );
   }
   return (
     <section className="sticky top-0 z-40">

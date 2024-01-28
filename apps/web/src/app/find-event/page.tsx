@@ -1,29 +1,23 @@
 'use client';
 
-'use client';
-
-import { useEffect, useState } from 'react';
+import { baseUrl } from '@/utils/config';
+import axios from 'axios';
+import { Badge, Button, Kbd } from 'flowbite-react';
 import Image from 'next/image';
-import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Badge } from 'flowbite-react';
-import { IoLocation } from 'react-icons/io5';
+import { useEffect, useState } from 'react';
 import { FaMoneyBillWave } from 'react-icons/fa6';
+import { IoLocation } from 'react-icons/io5';
 import { eventList } from '../home/api/api';
+import HeaderDiscovery from './components/HeaderDiscovery';
+import SearchDiscovery from './components/SearchDiscovery';
+import CardEvent from './components/CardEvent';
 
-interface Event {
-  id: string;
-  category: string;
-  image: string;
-  title: string;
-  dateTime: string;
-  location: string;
-  price: number;
-  description: string;
-}
-
-const AllEvent: React.FC = () => {
+const EventDistPage = () => {
   const [events, setEvents] = useState<Event[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
+  const [totalPages, setTotalPages] = useState(0);
   const router = useRouter();
 
   const getEvents = async () => {
@@ -42,59 +36,71 @@ const AllEvent: React.FC = () => {
   const handleCardClick = (eventId: string) => {
     router.push(`/event-detail/${eventId}`);
   };
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handlePreviousClick = () => {
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextClick = () => {
+    if (page < totalPages) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+  const getAllEvents = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/events/all-events?page=${page}&pageSize=${pageSize}`,
+      );
+      setEvents(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllEvents();
+  }, [page, pageSize]);
 
   return (
     <section>
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6">Events</h2>
-        <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  gap-4">
-          {events.map((event) => (
-            <div
-              key={event.id}
-              className="bg-white rounded shadow p-4 transition-transform duration-300 transform hover:scale-105 cursor-pointer"
-              onClick={() => handleCardClick(event.id)}
-            >
-              <Image
-                src="/bg1.jpg"
-                width={500}
-                height={500}
-                alt={`Event ${event.id}`}
-                className="w-full h-40 object-cover mb-4"
-              />
-              <div className="flex items-center gap-2">
-                <Badge color="success" size="sm" className="w-fit">
-                  {event.category}
-                </Badge>
-                <Badge color="grey" size="sm" className="w-fit">
-                  {event.dateTime.slice(0, 10)}
-                </Badge>
-              </div>
-              <h5 className=" line-clamp-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {event.title}
-              </h5>
-              <p className="flex line-clamp-3 font-normal text-gray-700 dark:text-gray-400">
-                <span className="mr-2">
-                  <IoLocation />
-                </span>
-                {event.location}
-              </p>
-              <p className="flex line-clamp-3 font-normal text-gray-700 dark:text-gray-400">
-                <span className="mr-2">
-                  <FaMoneyBillWave />
-                </span>
-
-                {event.price}
-              </p>
-              <p className=" line-clamp-3 font-normal text-gray-700 dark:text-gray-400">
-                {event.description}
-              </p>
-            </div>
-          ))}
+        <div>
+          <HeaderDiscovery />
         </div>
-        <div className="text-center mt-8"></div>
+        <div>
+          <SearchDiscovery event={events} />
+        </div>
+
+        <div>
+          <CardEvent />
+        </div>
+
+        <div className="flex justify-center">
+          <div className="pagination-controls flex gap-1  mt-6">
+            <Button
+              className="bg-[#d7d7d7] text-black font-bold"
+              onClick={handlePreviousClick}
+              disabled={page === 1}
+            >
+              Prev
+            </Button>
+            <Kbd className="current-page text-lg px-2 items-center">{page}</Kbd>
+            <Button
+              className="bg-[#d7d7d7] text-black font-bold"
+              onClick={handleNextClick}
+              disabled={page === totalPages}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default AllEvent;
+export default EventDistPage;

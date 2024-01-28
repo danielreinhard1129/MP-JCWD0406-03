@@ -9,6 +9,7 @@ import { baseUrl } from '@/utils/config';
 import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import ClaimModal from './ClaimModal';
 
 const BuyerDetail = () => {
   const [swi, setSiw] = useState(false);
@@ -106,6 +107,16 @@ const BuyerDetail = () => {
     }
   };
 
+
+  const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
+
+  const handleOpenClaimModal = () => {
+    setIsClaimModalOpen(true);
+  };
+
+  const handleCloseClaimModal = () => {
+    setIsClaimModalOpen(false);
+      }
   const getPointsReferral = async () => {
     try {
       const { data } = await axiosInstance.get(
@@ -160,6 +171,10 @@ const BuyerDetail = () => {
           </div>
           <span>Rp {event?.price}</span>
         </div>
+        <div>
+          <button onClick={handleOpenClaimModal}>Voucher</button>
+          {isClaimModalOpen && <ClaimModal onClose={handleCloseClaimModal} />}
+        </div>
         <div className="flex justify-between my-2 font-bold">
           <span>Discount</span>
           <span>- Rp {usePoint}</span>
@@ -181,6 +196,7 @@ const BuyerDetail = () => {
             </span>
           </label>
         </div>
+
         <div className="flex justify-center">
           <button
             className="px-6 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#1b64f1] hover:[#1b64f1]"
