@@ -28,7 +28,7 @@ const HomePage = () => {
   return (
     <div>
       <HeaderBanner />
-      <SearchBar event={events} />
+      {/* <SearchBar event={events} /> */}
       <CategoryItem />
       <UpcomingEvents />
       {/* <CategoryMusicEvents/> */}

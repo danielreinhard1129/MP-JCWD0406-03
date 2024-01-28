@@ -24,7 +24,7 @@ export default function EventPage() {
   const router = useRouter();
   const params = useParams();
   console.log(params);
-
+  
   const [category, setCategory] = useState<Event[]>([]);
   const getEvents = async () => {
     try {
