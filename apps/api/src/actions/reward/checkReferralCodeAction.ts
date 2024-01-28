@@ -9,7 +9,6 @@ export const checkReferralCodeAction = async (
   try {
     
     const userReferral = await findReferralCode(referralCode);
-    console.log(userId,userReferral?.id);
     const isHasUse = await findReferralPointsByReferredId(userId);
     const user = await findUserById(userId);
     if (!userReferral) return { status: 404, message: 'referral is not found' };

@@ -39,10 +39,7 @@ export const useReferralCodeAction = async (
       };
       await createPointsReferral(dataPoints);
     } else {
-      console.log("11",userPoint.pointEarned);
       userPoint.pointEarned = userPoint.pointEarned + 10000;
-      console.log("22",userPoint.pointEarned);
-
       await updatePointReferralRepo(userPoint, userPoint.userId);
     }
     await createDiscontRepo(dataDiscount);

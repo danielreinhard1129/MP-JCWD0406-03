@@ -1,68 +1,14 @@
 'use client';
 import { FaSearch } from 'react-icons/fa';
-import { Button, Modal, Table } from 'flowbite-react';
+import { Button, Table } from 'flowbite-react';
 import { useState } from 'react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import useGetAllTransaction from '@/hooks/transactions/useGetAllTransaction';
 import { ITransaction } from '@/typeweb/transaction.type';
-import useGetEventById from '@/hooks/events/useGetEventById';
 import ModalProofOfPayment from './ModalProofOfPayment';
-import { baseUrl } from '@/utils/config';
-import { axiosInstance } from '@/helper/axios';
 import ModalDecline from './ModalDecline';
 import ModalAccept from './ModalAccept';
 
 const TransactionsCard = () => {
-  //   {
-  //     id: 52,
-  //     customer: 'Anggi',
-  //     event: 'Taylor Swift Concert',
-  //     quantity: 1,
-  //     total: '$422',
-  //     status: 'Transaction Success',
-  //   },
-  //   {
-  //     id: 53,
-  //     customer: 'Budi',
-  //     event: 'Ed Sheeran Concert',
-  //     quantity: 2,
-  //     total: '$800',
-  //     status: 'Waiting Admin Confirmation',
-  //   },
-  //   {
-  //     id: 54,
-  //     customer: 'Citra',
-  //     event: 'Coldplay Concert',
-  //     quantity: 1,
-  //     total: '$399',
-  //     status: 'Waiting Payment',
-  //   },
-  //   {
-  //     id: 55,
-  //     customer: 'Dewi',
-  //     event: 'The Weeknd Concert',
-  //     quantity: 1,
-  //     total: '$499',
-  //     status: 'Cancelled Transaction',
-  //   },
-  //   {
-  //     id: 56,
-  //     customer: 'Eko',
-  //     event: 'K-Pop Festival',
-  //     quantity: 3,
-  //     total: '$1200',
-  //     status: 'Expired Transaction',
-  //   },
-  //   {
-  //     id: 57,
-  //     customer: 'Fina',
-  //     event: 'Rock in Rio',
-  //     quantity: 2,
-  //     total: '$850',
-  //     status: 'Rejected Transaction',
-  //   },
-  // ]);
-
   let { data, refreshData } = useGetAllTransaction();
   const [modalDecline, setModalDecline] = useState(false);
   const [modalAccept, setModalAccept] = useState(false);
