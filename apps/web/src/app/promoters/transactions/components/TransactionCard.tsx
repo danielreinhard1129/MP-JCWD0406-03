@@ -76,6 +76,7 @@ const TransactionsCard = () => {
             </Table.Head>
             <Table.Body className="divide-y">
               {data.map((transaction: ITransaction, index: number) => (
+              {data?.map((transaction: ITransaction, index: number) => (
                 <Table.Row
                   key={index}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"

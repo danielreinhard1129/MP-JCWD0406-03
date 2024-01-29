@@ -9,6 +9,7 @@ import { baseUrl } from '@/utils/config';
 import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import ClaimModal from './ClaimModal';
 
 const BuyerDetail = () => {
   const [swi, setSiw] = useState(false);
@@ -106,6 +107,16 @@ const BuyerDetail = () => {
     }
   };
 
+
+  const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
+
+  const handleOpenClaimModal = () => {
+    setIsClaimModalOpen(true);
+  };
+
+  const handleCloseClaimModal = () => {
+    setIsClaimModalOpen(false);
+      }
   const getPointsReferral = async () => {
     try {
       const { data } = await axiosInstance.get(
@@ -160,6 +171,14 @@ const BuyerDetail = () => {
           </div>
           <span>Rp {event?.price}</span>
         </div>
+        <div>
+          <button onClick={handleOpenClaimModal}>Voucher</button>
+          {isClaimModalOpen && <ClaimModal onClose={handleCloseClaimModal} />}
+        </div>
+        <div className="flex justify-between my-2 font-bold">
+          <span>Discount</span>
+          <span>- Rp {usePoint}</span>
+        </div>
         <div className="flex justify-between my-2 font-bold">
           <span>Discount</span>
           <span>- Rp {usePoint}</span>
@@ -181,6 +200,20 @@ const BuyerDetail = () => {
             </span>
           </label>
         </div>
+        <div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              onChange={(e) => setSiw(e.target.checked)}
+            />
+            <div className="w-11 h-6 bg-gray-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Use point ({points?.pointEarned || 0})
+            </span>
+          </label>
+        </div>
+
         <div className="flex justify-center">
           <button
             className="px-6 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#1b64f1] hover:[#1b64f1]"

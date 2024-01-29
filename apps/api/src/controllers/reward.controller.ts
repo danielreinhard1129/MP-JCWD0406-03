@@ -1,4 +1,5 @@
 import { checkReferralCodeAction } from '@/actions/reward/checkReferralCodeAction';
+import { createDiscountAction } from '@/actions/reward/createDiscountAction';
 import getPointsByUserIdAction from '@/actions/reward/getPointsByUserIdAction';
 import updateReferralPointsAction from '@/actions/reward/updateReferralPointsAction';
 import { useReferralCodeAction } from '@/actions/reward/useReferralCodeAction';
@@ -24,6 +25,15 @@ export class RewardController {
     } catch (error) {
       next(error);
     }
+  }
+  async createDiscount(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = req.body;
+      const addResult = await createDiscountAction(data);
+      res.status(addResult.status).send(addResult);
+    } catch (error) {
+      console.log(error);
+    } 
   }
   async getReferralPointsByUserId(
     req: Request,

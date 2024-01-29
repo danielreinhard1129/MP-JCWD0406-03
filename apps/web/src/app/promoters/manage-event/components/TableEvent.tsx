@@ -21,7 +21,7 @@ const TableEvent = () => {
     <div className="overflow-x-auto">
       <Table>
         <Table.Head>
-          <Table.HeadCell>tittle</Table.HeadCell>
+          <Table.HeadCell>title</Table.HeadCell>
           <Table.HeadCell>Date</Table.HeadCell>
           <Table.HeadCell>Category</Table.HeadCell>
           <Table.HeadCell>Price</Table.HeadCell>

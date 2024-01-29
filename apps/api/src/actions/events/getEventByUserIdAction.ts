@@ -1,6 +1,5 @@
 import getEventByUserIdRepo from '@/repositories/events/getEventByUserIdRepo'
 
-
 const getEventByUserIdAction = async (userId:number) => {
   try {
     const data = await getEventByUserIdRepo(userId)

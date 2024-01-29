@@ -67,7 +67,7 @@ const EventInformation = ({ data }: any) => {
           </div>
           <br />
           <div className="flex">
-            <SlCalender /> {event.dateTime}
+            <SlCalender /> {event.dateTime.slice(0, 10)}
           </div>
         </div>
       </div>

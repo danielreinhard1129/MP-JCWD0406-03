@@ -3,7 +3,7 @@ export interface IEvent {
   title: string;
   userId: number;
   price: number;
-  dateTime: Date;
+  dateTime: string;
   location: string;
   description: string;
   availableSeat: number;
