@@ -15,7 +15,9 @@ const useGetTransactionByUserId = (userId: number): any => {
       const { data } = await axiosInstance.get(
         baseUrl + '/transaction/promoter/' + userId,
       );
-      setData(data.transactions[0]);
+      console.log(data);
+
+      setData(data.data);
     } catch (error) {
       console.log(error);
     }

@@ -180,10 +180,6 @@ const BuyerDetail = () => {
           <span>- Rp {usePoint}</span>
         </div>
         <div className="flex justify-between my-2 font-bold">
-          <span>Discount</span>
-          <span>- Rp {usePoint}</span>
-        </div>
-        <div className="flex justify-between my-2 font-bold">
           <span>Total</span>
           <span>Rp {calculateTotal() - usePoint}</span>
         </div>

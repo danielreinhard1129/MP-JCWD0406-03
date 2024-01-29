@@ -17,7 +17,6 @@ const TransactionsCard = () => {
   const [modalProof, setModalProof] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
   console.log(data);
-  
 
   const handleAccept = (transactionId: any) => {
     setSelectedTransactionId(transactionId);
@@ -75,7 +74,7 @@ const TransactionsCard = () => {
               </Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
-              {data.map((transaction: ITransaction, index: number) => (
+              {data?.map((transaction: ITransaction, index: number) => (
                 <Table.Row
                   key={index}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -115,6 +114,41 @@ const TransactionsCard = () => {
                   </Table.Cell>
                 </Table.Row>
               ))}
+              <Table.Row>
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  {1}
+                </Table.Cell>
+                <Table.Cell>{'aku'}</Table.Cell>
+                <Table.Cell>{'nama'}</Table.Cell>
+                <Table.Cell>{4}</Table.Cell>
+                <Table.Cell>{8088888}</Table.Cell>
+                <Table.Cell>{'waiting payment'}</Table.Cell>
+                <Table.Cell className="flex justify-between">
+                  <Button
+                    className="font-medium hover:underline "
+                    onClick={() => setModalProof(true)}
+                  >
+                    View
+                  </Button>
+                  {shouldShowActions(2 as number) && (
+                    <>
+                      <Button
+                        className="font-medium hover:underline "
+                        onClick={() => handleAccept(1)}
+                      >
+                        Accept
+                      </Button>
+
+                      <Button
+                        className="font-medium hover:underline "
+                        onClick={() => handleDecline(1)}
+                      >
+                        Decline
+                      </Button>
+                    </>
+                  )}
+                </Table.Cell>
+              </Table.Row>
             </Table.Body>
           </Table>
         </div>

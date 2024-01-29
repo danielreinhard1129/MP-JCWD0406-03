@@ -7,10 +7,9 @@ const getTransactionByUserIdRepo = async (userId: number) => {
         userId,
       },
       include: {
-        Transaction: { include: { user: true ,status:true} },
+        Transaction: { include: { user: true, status: true, event: true  } },
       },
     });
-
     return data;
   } catch (error) {
     throw error;

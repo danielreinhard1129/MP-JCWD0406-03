@@ -46,7 +46,7 @@ const FormRegister = ({ dispatch, role, setLogin }: any) => {
   return (
     <section>
       {next === 1 && (
-        <div>
+        <div >
           <div className="bg-[#4f4cee] flex justify-between px-6 mb-4">
             <h1 className="md:text-4xl py-3 text-white font-bold font-mono">
               Join To Karcis

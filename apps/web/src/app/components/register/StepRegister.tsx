@@ -2,7 +2,7 @@ import React from 'react'
 
 const StepRegister = ({next}:any) => {
   return (
-    <div className="flex  items-center m-4">
+    <div className="flex md:opacity-100 opacity-0 items-center m-4">
           <div className="flex flex-col items-center text-center">
             <div
               className={`border-2  ${

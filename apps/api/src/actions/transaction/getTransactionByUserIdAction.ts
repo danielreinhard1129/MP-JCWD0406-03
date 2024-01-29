@@ -1,19 +1,14 @@
 import getTransactionByUserIdRepo from '@/repositories/transactions/getTransactionByUserIdRepo';
+import { ITransaction } from '@/typeapi/transaction.type';
 
 const getTransactionByUserIdAction = async (userId: number) => {
   try {
-    let transactions: any = [];
-    const data = await getTransactionByUserIdRepo(userId);
-    data.forEach((value) => {
-      if (value.Transaction.length > 0) {
-        transactions.push(value.Transaction);
-      }
-    });
+    const data = (await getTransactionByUserIdRepo(userId)).flatMap((value) => value.Transaction);
 
     return {
       status: 200,
       message: 'Success get Data',
-      transactions,
+      data,
     };
   } catch (error) {
     throw error;
