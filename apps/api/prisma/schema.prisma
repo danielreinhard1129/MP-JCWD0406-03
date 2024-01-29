@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,6 +6,7 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 
 model User {
   id               Int              @id @default(autoincrement())
@@ -67,12 +65,12 @@ model Sample {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("samples") // if you want to use snake_case format
+  @@map("samples")
 }
 
 model Event {
   id            Int           @id @default(autoincrement())
-  userId Int @unique
+  userId        Int
   title         String
   price         Float
   dateTime      DateTime
@@ -93,6 +91,7 @@ model Event {
 
   @@map("events")
 }
+
 
 model Transaction {
   id            Int      @id @default(autoincrement())
@@ -115,11 +114,6 @@ model Transaction {
   TransactionUserReward  TransactionUserReward[]
 }
 
-model Status {
-  id          Int           @id @default(autoincrement())
-  title       String
-  Transaction Transaction[]
-}
 
 model TransactionDiscount {
   id            Int      @id @default(autoincrement())

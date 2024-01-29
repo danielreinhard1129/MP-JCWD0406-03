@@ -2,18 +2,22 @@
 import { FaSearch } from 'react-icons/fa';
 import { Button, Table } from 'flowbite-react';
 import { useState } from 'react';
-import useGetAllTransaction from '@/hooks/transactions/useGetAllTransaction';
 import { ITransaction } from '@/typeweb/transaction.type';
 import ModalProofOfPayment from './ModalProofOfPayment';
 import ModalDecline from './ModalDecline';
 import ModalAccept from './ModalAccept';
+import useGetTransactionByUserId from '@/hooks/transactions/useGetTransactionByUserId';
+import { useAppSelector } from '@/lib/hooks';
 
 const TransactionsCard = () => {
-  let { data, refreshData } = useGetAllTransaction();
+  const selector = useAppSelector((state) => state.user.dataUser);
+  let { data, refreshData } = useGetTransactionByUserId(selector.id || 0);
   const [modalDecline, setModalDecline] = useState(false);
   const [modalAccept, setModalAccept] = useState(false);
   const [modalProof, setModalProof] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  console.log(data);
+  
 
   const handleAccept = (transactionId: any) => {
     setSelectedTransactionId(transactionId);
@@ -71,6 +75,7 @@ const TransactionsCard = () => {
               </Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
+              {data.map((transaction: ITransaction, index: number) => (
               {data?.map((transaction: ITransaction, index: number) => (
                 <Table.Row
                   key={index}
@@ -79,11 +84,11 @@ const TransactionsCard = () => {
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {index + 1}
                   </Table.Cell>
-                  <Table.Cell>{transaction.user.firstName}</Table.Cell>
-                  <Table.Cell>{transaction.event.title}</Table.Cell>
-                  <Table.Cell>{transaction.qty}</Table.Cell>
-                  <Table.Cell>{transaction.total}</Table.Cell>
-                  <Table.Cell>{transaction.status.title}</Table.Cell>
+                  <Table.Cell>{transaction.user?.firstName}</Table.Cell>
+                  <Table.Cell>{transaction.event?.title}</Table.Cell>
+                  <Table.Cell>{transaction?.qty}</Table.Cell>
+                  <Table.Cell>{transaction?.total}</Table.Cell>
+                  <Table.Cell>{transaction?.status?.title}</Table.Cell>
                   <Table.Cell className="flex justify-between">
                     <Button
                       className="font-medium hover:underline "

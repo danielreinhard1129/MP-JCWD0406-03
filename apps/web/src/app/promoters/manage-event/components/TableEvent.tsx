@@ -4,10 +4,12 @@ import { Spinner, Table } from 'flowbite-react';
 import { axiosInstance } from '@/helper/axios';
 import { baseUrl } from '@/utils/config';
 import { IEvent } from '@/typeweb/event.type';
-import useGetAllEvents from '@/hooks/events/useGetAllEvents';
+import useGetAllEvents from '@/hooks/events/useGetEventsByUserId';
+import { useAppSelector } from '@/lib/hooks';
 
 const TableEvent = () => {
-  const { data, error, loading } = useGetAllEvents();
+  const selector = useAppSelector((state) => state.user.dataUser)
+  const { data, error, loading } = useGetAllEvents(selector.id || 0);
   if (loading) {
     return (
       <div className="flex justify-center w-full">

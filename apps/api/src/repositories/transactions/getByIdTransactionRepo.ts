@@ -4,7 +4,8 @@ export const getByIdTransactionRepo = async (id: number) => {
   try {
     const result = await prisma.transaction.findUnique({
       where: {
-        id
+        id,
+        
       },
     });    
     return result;

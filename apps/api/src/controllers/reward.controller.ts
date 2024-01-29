@@ -26,7 +26,6 @@ export class RewardController {
       next(error);
     }
   }
-
   async createDiscount(req: Request, res: Response, next: NextFunction) {
     try {
       const data = req.body;
@@ -36,7 +35,6 @@ export class RewardController {
       console.log(error);
     } 
   }
-  
   async getReferralPointsByUserId(
     req: Request,
     res: Response,
@@ -50,7 +48,6 @@ export class RewardController {
       next(error);
     }
   }
-  
   async updateReferralPoints(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.params;

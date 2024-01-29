@@ -3,6 +3,7 @@ import filterByLocationCategoryTitleAction from '@/actions/events/filterByLocati
 import { allEventsAction } from '@/actions/events/getAllEventAction';
 import { getEventsByCategoryAction } from '@/actions/events/getEventByCategoryAction';
 import { getEventByIdAction } from '@/actions/events/getEventByIdAction';
+import getEventByUserIdAction from '@/actions/events/getEventByUserIdAction';
 import { getEventsByDateAction } from '@/actions/events/getEventsByDateAction';
 import { updateEventAction } from '@/actions/events/updateEventAction';
 import { NextFunction, Request, Response } from 'express';
@@ -47,6 +48,12 @@ export class EventController {
       console.log(error);
       next(error);
     }
+  }
+
+  async getEventByUserId(req: Request, res: Response, next: NextFunction) {
+    const { userId } = req.params;
+    const result = await getEventByUserIdAction(parseInt(userId, 0));
+    res.status(result.status).send(result);
   }
 
   async getEventsByCategory(req: Request, res: Response, next: NextFunction) {

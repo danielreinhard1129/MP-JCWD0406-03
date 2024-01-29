@@ -4,8 +4,8 @@ import { useAppSelector } from '@/lib/hooks';
 import React from 'react';
 import Statisticts from './Statisticts';
 import { PromoterGuard } from '@/helper/HOC/AdminGuard';
-import useGetAllEvents from '@/hooks/events/useGetAllEvents';
 import { Spinner } from 'flowbite-react';
+import useGetEventsByUserId from '@/hooks/events/useGetEventsByUserId';
 
 const roboto = Poppins({
   weight: '400',
@@ -14,15 +14,13 @@ const roboto = Poppins({
 
 const DashboardCard = () => {
   const selector = useAppSelector((state) => state.user.dataUser);
-  const { data, error, loading } = useGetAllEvents();
+  const { data, error, loading } = useGetEventsByUserId(selector.id || 0);
+
+  
   if (loading) {
     return (
       <div className="flex justify-center w-full h-screen items-center">
-        <Spinner
-          
-          aria-label="Extra large spinner example"
-          size="xl"
-        />
+        <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
   }

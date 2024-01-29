@@ -1,6 +1,7 @@
 import { createTransactionAction } from '@/actions/transaction/createTransactionAction';
 import { allTransactionAction } from '@/actions/transaction/getAllTransactionAction';
 import { getByIdTransactionAction } from '@/actions/transaction/getByIdTransactionAction';
+import getTransactionByUserIdAction from '@/actions/transaction/getTransactionByUserIdAction';
 import sendProofOfPaymentAction from '@/actions/transaction/sendProofOfPaymentAction';
 import { updateTransactionAction } from '@/actions/transaction/updateTransactionAction';
 import prisma from '@/prisma';
@@ -62,15 +63,31 @@ export class TransactionController {
     }
   }
 
-  // async sendProofOfPayment(req: Request, res: Response, next: NextFunction){
-  //   try {
-  //     const{id} = req.params
-  //     const image = req.file?.filename
-  //     const result = await sendProofOfPaymentAction(parseInt(id,0),image as string)
-  //   } catch (error) {
-      
-  //   }
-  // }
+  async getTransactionByUserId(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const { userId } = req.params;
+      const result = await getTransactionByUserIdAction(parseInt(userId, 0));
+      res.status(result.status).send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async sendProofOfPayment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const image = req.file?.filename;
+      const result = await sendProofOfPaymentAction(
+        parseInt(id, 0),
+        image as string,
+      );
+    } catch (error) {}
+  }
+
   async updateTransaction(req: Request, res: Response, next: NextFunction) {
     try {
       const id = parseInt(req.params.id);
